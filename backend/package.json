@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "esdoc": "^1.1.0",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0"
+  },
+  "name": "engitech-backend",
+  "version": "0.0.0",
+  "description": "Backend da aplicação engitech",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jean Ferri",
+  "license": "ISC"
+}
