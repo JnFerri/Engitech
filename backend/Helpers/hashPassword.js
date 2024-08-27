@@ -10,4 +10,4 @@ async function hashPassword(password){
     }
 }
 
-export default HashPassword
+export default hashPassword

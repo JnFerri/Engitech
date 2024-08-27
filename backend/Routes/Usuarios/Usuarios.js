@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {todosUsuarios,usuarioPorId,criarUsuario,deletarUsuarioPorId,alterarSenhaUsuario,loginUsuario } from "../../Controllers/usuarios.js";
+import {todosUsuarios,usuarioPorId,criarUsuario,deletarUsuarioPorId,alterarSenhaUsuario,loginUsuario } from "../../Controllers/Usuarios.js";
 
 
 const router = Router()
@@ -10,7 +10,7 @@ router.get('/:id', (req,res) => {usuarioPorId(req,res)})
 
 router.post('/create', (req,res) => {criarUsuario(req,res)})
 
-router.get('/delete/:id', (req,res) => {deletarUsuarioPorId(req,res)})
+router.delete('/delete/:id', (req,res) => {deletarUsuarioPorId(req,res)})
 
 router.patch('/update', (req,res) => {alterarSenhaUsuario(req,res)})
 

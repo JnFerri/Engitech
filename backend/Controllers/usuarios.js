@@ -1,15 +1,20 @@
 import DBConnection from "../Configs/DBconfig.js";
 import confereHash from "../Helpers/ConfereHash.js";
-import HashPassword from "../Helpers/hashPassword.js";
+import hashPassword from "../Helpers/hashPassword.js";
+import verificaToken from "../Helpers/verificaToken.js";
 
 
 async function todosUsuarios(req,res) {
     try{
-        const [rows] = await DBConnection.promise().query("SELECT * FROM usuarios")
-        if(rows.length > 0 ){
-            res.status(200).json(rows)
-        }else{
-            res.send('Nenhum usuario encontrado.')
+        if(await verificaToken(req)){
+            const [rows] = await DBConnection.promise().query("SELECT * FROM usuarios")
+            if(rows.length > 0 ){
+                res.status(200).json(rows)
+            }else{
+                res.send('Nenhum usuario encontrado.')
+            }
+        }else {
+            res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
         res.status(500).json(`erro interno do servidor ${err}`)
@@ -18,12 +23,16 @@ async function todosUsuarios(req,res) {
 
 async function usuarioPorId(req,res) {
     try{
+    if(await verificaToken(req)){
         const [rows] = await DBConnection.promise().query(`SELECT * FROM usuarios Where usu_id = ${req.params.id}`)
         if(rows.length > 0 ){
             res.status(200).json(rows)
         }else{
             res.send('Nenhum usuario encontrado.')
         }
+    }else {
+        res.status(401).json({ message: 'Token inválido.' })
+    }
     }catch(err){
         res.status(500).json(`erro interno do servidor ${err}`)
 }
@@ -31,12 +40,15 @@ async function usuarioPorId(req,res) {
 
 async function criarUsuario(req,res){
     try{
-        
-        const sql = 'insert into usuarios (usu_nome , usu_email , usu_senha) values (?,?,?)'
-        const senhaHash = await hashPassword(req.body.usu_senha)
-        const filtro = [req.body.usu_nome, req.body.usu_email, senhaHash]
-        await DBConnection.promise().query(sql,filtro)
-        res.status(201).json({ message: 'Usuário criado com sucesso.' })
+        if(await verificaToken(req)){
+            const sql = 'insert into usuarios (usu_nome , usu_email , usu_senha) values (?,?,?)'
+            const senhaHash = await hashPassword(req.body.usu_senha)
+            const filtro = [req.body.usu_nome, req.body.usu_email, senhaHash]
+            await DBConnection.promise().query(sql,filtro)
+            res.status(201).json({ message: 'Usuário criado com sucesso.' })
+        }else {
+            res.status(401).json({ message: 'Token inválido.' })
+        }
 
     }catch(err){
         if(err.code === 'ER_DUP_ENTRY'){
@@ -52,9 +64,14 @@ async function criarUsuario(req,res){
 
 async function deletarUsuarioPorId(req,res){
     try{
-        const sql = `delete from usuarios where id = ?`
-        await DBConnection.promise().query(sql, [req.params.id])
-        res.status(204).json({ message: 'Usuário deletado com sucesso.' })
+        if(await verificaToken(req)){
+
+            const sql = `delete from usuarios where usu_id = ?`
+            await DBConnection.promise().query(sql, [req.params.id])
+            res.status(204).json({ message: 'Usuário deletado com sucesso.' })
+        }else {
+            res.status(401).json({ message: 'Token inválido.' })
+        }
     }catch(err){
         res.status(500).json({ error: `Erro interno do servidor ao deletar usuario. ${err}` })
     }
@@ -62,10 +79,14 @@ async function deletarUsuarioPorId(req,res){
 
 async function alterarSenhaUsuario(req,res){
     try{
-        const sql = `update usuarios set password = ? where id = ?`
-        const senhaHash = await HashPassword(req.body.password)
-        await DBConnection.promise().query(sql, [senhaHash, req.params.id])
-        res.status(200).json({ message: 'Senha alterada com sucesso.' })
+        if(await verificaToken(req)){
+            const sql = `update usuarios set usu_senha = ? where usu_id = ?`
+            const senhaHash = await HashPassword(req.body.password)
+            await DBConnection.promise().query(sql, [senhaHash, req.params.id])
+            res.status(200).json({ message: 'Senha alterada com sucesso.' })
+        }else{
+            res.status(401).json({ message: 'Token inválido.' })
+        }
     }catch(err){
         res.status(500).json({ error: `Erro interno do servidor ao alterar senha. ${err}` })
     }
@@ -73,7 +94,7 @@ async function alterarSenhaUsuario(req,res){
 
 async function loginUsuario(req,res){
     try{
-        const sql = `select * from usuarios where email = ?`
+        const sql = `select * from usuarios where usu_email = ?`
         const [rows] = await DBConnection.promise().query(sql, [req.body.email])
         if(rows.length > 0){
 
