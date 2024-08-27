@@ -14,6 +14,9 @@ router.get('/delete/:id', (req,res) => {deletarUsuarioPorId(req,res)})
 
 router.patch('/update', (req,res) => {alterarSenhaUsuario(req,res)})
 
+router.post('/login', (req,res) => {loginUsuario(req,res)})
+
+
 
 
 export default router
