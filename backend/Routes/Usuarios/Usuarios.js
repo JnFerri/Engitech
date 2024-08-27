@@ -1,0 +1,19 @@
+import { Router } from "express";
+import {todosUsuarios,usuarioPorId,criarUsuario,deletarUsuarioPorId,alterarSenhaUsuario,loginUsuario } from "../../Controllers/usuarios.js";
+
+
+const router = Router()
+
+router.get('/', (req,res) => {todosUsuarios(req,res)})
+
+router.get('/:id', (req,res) => {usuarioPorId(req,res)})
+
+router.post('/create', (req,res) => {criarUsuario(req,res)})
+
+router.get('/delete/:id', (req,res) => {deletarUsuarioPorId(req,res)})
+
+router.patch('/update', (req,res) => {alterarSenhaUsuario(req,res)})
+
+
+
+export default router

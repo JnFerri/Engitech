@@ -1,0 +1,94 @@
+import DBConnection from "../Configs/DBconfig.js";
+import confereHash from "../Helpers/ConfereHash.js";
+import HashPassword from "../Helpers/hashPassword.js";
+
+
+async function todosUsuarios(req,res) {
+    try{
+        const [rows] = await DBConnection.promise().query("SELECT * FROM usuarios")
+        if(rows.length > 0 ){
+            res.status(200).json(rows)
+        }else{
+            res.send('Nenhum usuario encontrado.')
+        }
+    }catch(err){
+        res.status(500).json(`erro interno do servidor ${err}`)
+    }
+}
+
+async function usuarioPorId(req,res) {
+    try{
+        const [rows] = await DBConnection.promise().query(`SELECT * FROM usuarios Where usu_id = ${req.params.id}`)
+        if(rows.length > 0 ){
+            res.status(200).json(rows)
+        }else{
+            res.send('Nenhum usuario encontrado.')
+        }
+    }catch(err){
+        res.status(500).json(`erro interno do servidor ${err}`)
+}
+}
+
+async function criarUsuario(req,res){
+    try{
+        
+        const sql = 'insert into usuarios (usu_nome , usu_email , usu_senha) values (?,?,?)'
+        const senhaHash = await hashPassword(req.body.usu_senha)
+        const filtro = [req.body.usu_nome, req.body.usu_email, senhaHash]
+        await DBConnection.promise().query(sql,filtro)
+        res.status(201).json({ message: 'Usuário criado com sucesso.' })
+
+    }catch(err){
+        if(err.code === 'ER_DUP_ENTRY'){
+            res.status(409).json({ message: 'Nome ou email ja existem.' })
+        }else if (err.code === 'ER_BAD_FIELD_ERROR') {
+            res.status(400).json({ message: 'Campo inválido na consulta.' })
+        } else {
+            res.status(500).json({ error: `Erro interno do servidor. ${err}` })
+        }
+    }
+    
+}
+
+async function deletarUsuarioPorId(req,res){
+    try{
+        const sql = `delete from usuarios where id = ?`
+        await DBConnection.promise().query(sql, [req.params.id])
+        res.status(204).json({ message: 'Usuário deletado com sucesso.' })
+    }catch(err){
+        res.status(500).json({ error: `Erro interno do servidor ao deletar usuario. ${err}` })
+    }
+}
+
+async function alterarSenhaUsuario(req,res){
+    try{
+        const sql = `update usuarios set password = ? where id = ?`
+        const senhaHash = await HashPassword(req.body.password)
+        await DBConnection.promise().query(sql, [senhaHash, req.params.id])
+        res.status(200).json({ message: 'Senha alterada com sucesso.' })
+    }catch(err){
+        res.status(500).json({ error: `Erro interno do servidor ao alterar senha. ${err}` })
+    }
+}
+
+async function loginUsuario(req,res){
+    try{
+        const sql = `select * from usuarios where email = ?`
+        const [rows] = await DBConnection.promise().query(sql, [req.body.email])
+        if(rows.length > 0){
+
+            if(confereHash(rows[0].password , req.body.password)){
+                res.status(200).json({ message: 'Login realizado com sucesso.' })
+            }else{
+                res.status(401).json({ message: 'Senha incorreta.' })
+            }
+        }else{
+            res.status(404).json({ message: 'Usuário não encontrado.' })
+        }
+}
+    catch(err){
+        res.status(500).json({ error: `Erro interno do servidor ao login. ${err}` })
+    }
+}
+
+export {todosUsuarios, usuarioPorId, criarUsuario , deletarUsuarioPorId, alterarSenhaUsuario, loginUsuario}
