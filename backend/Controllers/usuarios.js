@@ -81,8 +81,8 @@ async function alterarSenhaUsuario(req,res){
     try{
         if(await verificaToken(req)){
             const sql = `update usuarios set usu_senha = ? where usu_id = ?`
-            const senhaHash = await HashPassword(req.body.password)
-            await DBConnection.promise().query(sql, [senhaHash, req.params.id])
+            const senhaHash = await hashPassword(req.body.usu_senha)
+            await DBConnection.promise().query(sql, [senhaHash, req.body.usu_id])
             res.status(200).json({ message: 'Senha alterada com sucesso.' })
         }else{
             res.status(401).json({ message: 'Token inválido.' })
@@ -95,10 +95,10 @@ async function alterarSenhaUsuario(req,res){
 async function loginUsuario(req,res){
     try{
         const sql = `select * from usuarios where usu_email = ?`
-        const [rows] = await DBConnection.promise().query(sql, [req.body.email])
+        const [rows] = await DBConnection.promise().query(sql, [req.body.usu_email])
         if(rows.length > 0){
 
-            if(confereHash(rows[0].password , req.body.password)){
+            if(confereHash(rows[0].usu_senha , req.body.usu_senha)){
                 res.status(200).json({ message: 'Login realizado com sucesso.' })
             }else{
                 res.status(401).json({ message: 'Senha incorreta.' })

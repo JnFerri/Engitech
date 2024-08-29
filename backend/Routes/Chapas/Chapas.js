@@ -11,8 +11,12 @@ router.get('/codigo/:codigo', (req,res) => {chapaPorCodigo(req,res)})
 
 router.get('/material/:mat_id', (req,res) => {chapaPorMaterial(req,res)})
 
+router.post('/calculo', (req,res) => {pegaChapasParaCalculo(req,res)})
+
 router.post('/create', (req,res) => {cadastrarChapa(req,res)})
 
 router.delete('/delete/:id', (req,res) => {deletarChapaPorId(req,res)})
+
+
 
 export default router
