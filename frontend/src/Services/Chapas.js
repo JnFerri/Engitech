@@ -129,6 +129,9 @@ async function pegarChapasParaCalculo(mat_id,cha_espessura){
                 cha_espessura: cha_espessura
             })
         }
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/calculo`,options)
+        const data = await result.json()
+        return data
     }catch(err){
         console.error('Erro ao pegar chapas para calculo')
         throw err
