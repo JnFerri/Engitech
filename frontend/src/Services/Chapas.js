@@ -12,7 +12,7 @@ async function pegarTodasChapas(){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar chapas' , err)
         throw err
@@ -29,7 +29,7 @@ async function pegarChapaPorId(id){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/${id}`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar chapa pelo ID')
         throw err
@@ -47,7 +47,7 @@ async function pegarChapaPorCodigo(codigo){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/codigo/${codigo}`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar chapa por codigo')
         throw err
@@ -65,7 +65,7 @@ async function pegarChapaPorMaterial(id){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/material/${id}`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar chapa por material')
         throw err
@@ -91,7 +91,7 @@ async function cadastrarChapa(codigo,nome,comprimento,altura,espessura,mat_id){
         }
         const result  = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/create`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao cadastrar chapa')
         throw err
@@ -109,7 +109,7 @@ async function deletarChapaPorId(id){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/delete/${id}`,options) 
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao deletar chapa')
         throw err
@@ -131,7 +131,7 @@ async function pegarChapasParaCalculo(mat_id,cha_espessura){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/calculo`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar chapas para calculo')
         throw err

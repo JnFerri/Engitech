@@ -11,7 +11,7 @@ async function PegaTodosOsUsuarios(){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar usuarios' , err)
         throw err
@@ -29,7 +29,7 @@ async function PegaUsuarioPorId(id){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/${id}`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao pegar usuario por id' , err)
         throw err
@@ -53,7 +53,7 @@ async function criarUsuario(nome,email,senha){
     }
     const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/create`,options)
     const data = await result.json()
-    return data
+    return {data:data , status:result.status}
 
 }catch(err){
     console.error('Erro ao criar usuario' , err)
@@ -73,7 +73,7 @@ async function deletarUsuarioPorId(id){
             }
             const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/delete/${id}`,options)
             const data = await result.json()
-            return data
+            return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao deletar usuario' , err)
         throw err
@@ -96,7 +96,7 @@ async function alterarSenhaUsuario(id,senha){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/update/senha`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao alterar senha' , err)
         throw err
@@ -119,7 +119,7 @@ async function loginUsuario(email,senha){
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/login`,options)
         const data = await result.json()
-        return data
+        return {data:data , status:result.status}
     }catch(err){
         console.error('Erro ao login' , err)
         throw err
