@@ -98,7 +98,7 @@ async function loginUsuario(req,res){
         const [rows] = await DBConnection.promise().query(sql, [req.body.usu_email])
         if(rows.length > 0){
             if(await confereHash(rows[0].usu_senha , req.body.usu_senha) === true){
-                return res.status(200).json({ message: 'Login realizado com sucesso.'})
+                return res.status(200).json({ data: rows[0] , tokenAuth : process.env.TOKEN})
             }else{
                 res.status(401).json({ message: 'Senha incorreta.' })
             }

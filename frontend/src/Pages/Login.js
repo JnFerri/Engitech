@@ -3,6 +3,9 @@ import Imagem from "../Components/Imagem/Imagem.js";
 import engiTechLogo from '../Images/Engitech_logo.png'
 import FormLogin from "../Components/FormLogin/FormLogin.js";
 import BannerLogin from "../Components/BannerLogin.js/BannerLogin.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUsuario } from "../Context/Usuario.js";
 
 const LoginPage = styled.section`
 display:flex;
@@ -29,6 +32,15 @@ background-color:black;
 
 
 function Login(){
+    const {IsAuth} = useUsuario()
+
+    const navigate = useNavigate()
+    useEffect(() => {
+        if(IsAuth){
+            navigate('/home')
+        }
+    })
+
     return(
     <LoginPage>
         <LoginFormContainer>

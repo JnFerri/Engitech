@@ -2,8 +2,9 @@ import styled from "styled-components"
 import Label from "../Label/Label.js"
 import InputForm from "../InputForm/InputForm.js"
 import Button from "../Button/Button.js"
-import { useState } from "react"
-import { loginUsuario } from "../../Services/Usuarios.js"
+import { useNavigate } from "react-router-dom"
+import { useUsuario } from "../../Context/Usuario.js"
+
 
 const FormContainer = styled.form`
 display:flex;
@@ -15,35 +16,12 @@ margin: 0 5%;
 
 `
 
-
-
-
 function FormLogin(props){
-    const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
-    const [error, setError] = useState('')
-    
-    function handleEmail(e){
-    setEmail(e.target.value)
-    }
-    
-    function handleSenha(e){
-    setSenha(e.target.value)
-    }
-
-    async function handleSubmit(e){
-        e.preventDefault()
-        const result = await loginUsuario(email,senha)
-        console.log(result)
-        if(result.data.status === 200){
-            console.log(result)
-        }else {
-            setError(result.data.message)
-        }
-    }
+    const {handleSubmit , handleEmail , handleSenha , error} = useUsuario()
+    const navigate = useNavigate()
     
     return(
-        <FormContainer width={props.width} onSubmit={handleSubmit}>
+        <FormContainer width={props.width} onSubmit={async (e) => await handleSubmit(e,navigate)}>
             <Label color="white">Email</Label>
             <InputForm type="email" onChange={handleEmail}></InputForm>
             <Label color="white">Senha</Label>
