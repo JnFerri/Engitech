@@ -19,6 +19,9 @@ const ListaContainer = styled.ul`
 const ListaItem = styled.li`
     border: 0.2px solid rgba(155,155,155,0.5);
     padding:2px 0;
+    font-family: "Barlow Condensed", system-ui;
+    font-weight: 400;
+    font-style: normal;
 
     &&:hover{
     background-color : #949392;
@@ -27,7 +30,7 @@ const ListaItem = styled.li`
 `
 
 
-function ListaDropDown(){
+function ListaDropDownUsuario(){
     const {handleLogout} = useUsuario()
     const navigate = useNavigate()
 
@@ -39,4 +42,4 @@ function ListaDropDown(){
     )
 }
 
-export default ListaDropDown
+export default ListaDropDownUsuario

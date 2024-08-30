@@ -9,12 +9,14 @@ align-items:center;
 justify-content:space-between;
 background-color:#314159;
 width:100%;
+height:6%;
+min-height:6%;
 `
 
 function NavBarSuperior(){
     return(
         <NavBarContainer>
-            <Imagem src={logoEngitech} alt="logo engitech" width='4%' margin='0.5rem 1rem' />
+            <Imagem src={logoEngitech} alt="logo engitech" width='4%' height='auto' margin='0.5rem 1rem' />
             <MenuDropDownUsuario/>
         </NavBarContainer>
     )

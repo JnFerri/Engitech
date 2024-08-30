@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Imagem from "../Imagem/Imagem.js";
 import iconeUsuario from '../../Images/icone-usuario.png'
 import { useEffect, useRef, useState } from "react";
-import ListaDropDown from "./ListaDropDown/ListaDropDown.js";
+import ListaDropDownUsuario from "./ListaDropDownUsuario/ListaDropDownUsuario.js";
 
 const MenuContainer = styled.div`
 display:flex;
@@ -16,7 +16,6 @@ border-radius:5px;
 box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 cursor:pointer;
 position:relative;
-
 `
 
 
@@ -41,9 +40,9 @@ function MenuDropDownUsuario(){
     return(
         <MenuContainer ref={dropdownRef} onClick={() => setEstaAberto(!estaAberto)} >
                 <Imagem src={iconeUsuario} alt="imagem usuario" width='15%' margin='5px 0' />
-                <span style={{color:'white'}}>{Usuario.usu_nome}</span>
+                <span style={{color:'white', fontFamily: "Barlow Condensed, system-ui", fontWeight: '400', fontStyle: 'normal'}}>{Usuario.usu_nome}</span>
                 {
-                    estaAberto && <ListaDropDown/>
+                    estaAberto && <ListaDropDownUsuario/>
                 }
         </MenuContainer>
     )
