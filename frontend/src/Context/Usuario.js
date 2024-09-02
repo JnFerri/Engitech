@@ -27,6 +27,8 @@ export const UsuarioProvider = ({children}) => {
             localStorage.setItem('tokenAuth', result.data.tokenAuth)
             setUsuario(result.data.data)
             setIsAuth(true)
+            setEmail('')
+            setSenha('')
             navigate('/home')
         }else {
             setError(result.data.message)

@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
 const sizes = {
-    pequeno: '10px ',
-    medio: '11px ',
-    grande: '13px '
+    pequeno: '10px',
+    medio: '11px',
+    grande: '13px'
 }
 
 const fontSize = {
@@ -24,7 +24,7 @@ const borderRadiusSize = {
     grande: '10px'
 }
 
-const InputForm = styled.input`
+const SelectForm = styled.select`
     border: ${props => borderSize[props.tamanho] || borderSize.medio};
     border-radius: ${props => borderRadiusSize[props.tamanho] || borderRadiusSize.medio};
     padding: ${props => sizes[props.tamanho] || sizes.medio};
@@ -37,4 +37,4 @@ const InputForm = styled.input`
     font-style: normal;
 ` 
 
-export default InputForm
+export default SelectForm

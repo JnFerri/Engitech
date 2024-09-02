@@ -4,12 +4,15 @@ import './index.css';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals.js';
 import { UsuarioProvider } from './Context/Usuario.js';
+import { CalculadoraAproveitamentoProvider } from './Context/CalculadoraAproveitamento.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
     <UsuarioProvider>
+        <CalculadoraAproveitamentoProvider>
     <App />
+        </CalculadoraAproveitamentoProvider>
     </UsuarioProvider>
   
 );
