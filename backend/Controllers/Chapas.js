@@ -1,5 +1,7 @@
 
 import DBConnection from "../Configs/DBconfig.js";
+import verificaToken from "../Helpers/verificaToken.js";
+
 
 
 async function todasChapas(req,res) {
