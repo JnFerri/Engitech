@@ -6,10 +6,11 @@ import InputForm from "../../InputForm/InputForm.js";
 import SelectForm from "../../SelectForm/SelectForm.js";
 import imagemMedidas from '../../../Images/Medidas_chapas.png'
 import Imagem from "../../Imagem/Imagem.js";
-import Span from "../../../Span/Span.js";
+import Span from "../../Span/Span.js";
 import { useCalculadoraAproveitamento } from "../../../Context/CalculadoraAproveitamento.js";
 import {useEffect} from 'react'
 import { pegarTodosMateriais } from "../../../Services/Materiais.js";
+import Button from "../../Button/Button.js";
 
 const FormContainer = styled.section`
     width: 100%;
@@ -17,9 +18,8 @@ const FormContainer = styled.section`
     align-items:center;
     justify-content: space-between;
     background-color:white;
-    box-shadow: 4px 4px 5px rgba(0,0,0,0.5);
+    box-shadow: 4px 4px 5px rgba(0,0,0,0.25);
     border-radius:5px;
-    padding: 0 0.5rem;
 `
 
 const FormCalculo = styled.form`
@@ -33,7 +33,7 @@ const FormCalculo = styled.form`
 
 
 function FormCalculoAproveitamento() {
-    const {HandleMedidaA, HandleMedidaB, HandlePeso, HandleMaterialSelecionado, HandleEspessuraSelecionada, EspessuraOptions,MaterialSelecionado,MaterialOptions,setMaterialOptions} = useCalculadoraAproveitamento()
+    const {HandleMedidaA, HandleMedidaB, HandlePeso, HandleMaterialSelecionado, HandleEspessuraSelecionada, EspessuraOptions,MaterialSelecionado,MaterialOptions,setMaterialOptions , HandleSubmit, MedidaA, MedidaB, Peso, EspessuraSelecionada} = useCalculadoraAproveitamento()
 
     useEffect(() => {
         async function PegarMateriais(){
@@ -44,31 +44,29 @@ function FormCalculoAproveitamento() {
     }
     ,[setMaterialOptions])
 
-    useEffect(() => {
-        console.log(MaterialSelecionado)
-    },[MaterialSelecionado])
+
 
     return(
         <FormContainer>
-            <FormCalculo>
+            <FormCalculo onSubmit={HandleSubmit}>
                 <DivLinha>
                     <DivColuna>
                         <Label tamanho = "pequeno">Medida A da Peça</Label>
-                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaA}></InputForm>
+                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaA} value={MedidaA} required></InputForm>
                     </DivColuna>
                     <DivColuna>
                         <Label tamanho = "pequeno">Medida B da Peça</Label>
-                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaB}></InputForm>
+                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaB} value={MedidaB} required></InputForm>
                     </DivColuna>
                 </DivLinha>
                 <DivLinha>
                     <DivColuna>
                         <Label tamanho = "pequeno">Peso da Peça</Label>
-                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandlePeso}></InputForm>
+                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandlePeso} value={Peso} required></InputForm>
                     </DivColuna>
                     <DivColuna>
                         <Label tamanho = "pequeno">Material</Label>
-                        <SelectForm tamanho = "medio" width= '86%' onChange={HandleMaterialSelecionado} value={MaterialSelecionado}>
+                        <SelectForm tamanho = "medio" width= '86%' onChange={HandleMaterialSelecionado} value={MaterialSelecionado} required>
                             <option>Selecione o Material</option>
                             {
                                 MaterialOptions ?
@@ -84,22 +82,22 @@ function FormCalculoAproveitamento() {
                 <DivLinha>
                 <DivColuna>
                         <Label tamanho = "pequeno">Espessura</Label>
-                        <SelectForm tamanho = "medio" width= '93%' onChange={HandleEspessuraSelecionada}>
+                        <SelectForm tamanho = "medio" width= '86%' onChange={HandleEspessuraSelecionada} value={EspessuraSelecionada} required>
                             <option>Selecione a Espessura</option>
                             {
                                 EspessuraOptions ?
                                 EspessuraOptions.map((dado,index) => (
-                                    <option value={dado.cha_espessura} key={index}>{dado.cha_espessura}</option>
+                                    <option value={dado.cha_espessura} key={index}>{dado.cha_espessura}mm</option>
                                 ))
                                 :
                                 ''
                             }
                         </SelectForm>
                     
-                            <Span width='93%'>Caso não houver a espessura da peça, significa que não há chapa deste material e espessura cadastradas.</Span>
                     </DivColuna>
-
+                            <Span width='100%' style={{display:'flex', justifyContent:'center', alignItems:'center' }}>Caso não houver a espessura da peça, significa que não há chapa deste material e espessura cadastradas.</Span>
                 </DivLinha>
+                            <Button secundario tamanho='medio' width='60%'>Calcular</Button>
             </FormCalculo>
 
             <Imagem src={imagemMedidas} alt="Medidas das peças medida A menor e B Maior." width='30%' margin='0px 2rem 0px 0px'/>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import CalculadoraAproveitamento from "../CalculaldoraAproveitamento/CalculadoraAproveitamento.js";
+import { useMenuLateral } from "../../Context/MenuLateral.js";
+import ChapasCadastradas from "../ChapasCadastradas/ChapasCadastradas.js";
 
 
 const PainelContainer = styled.section`
@@ -13,9 +15,23 @@ align-items:center;
 `
 
 function PainelUtilizacao(){
+    const {OpcaoSelecionadaMenuLateral} = useMenuLateral()
+
     return(
         <PainelContainer>
-           <CalculadoraAproveitamento/>
+            {
+                OpcaoSelecionadaMenuLateral === 'CalculadoraAproveitamento' ?
+                <CalculadoraAproveitamento/>
+                :
+                OpcaoSelecionadaMenuLateral === 'ChapasCadastradas' ?
+                <ChapasCadastradas/>
+                :
+                OpcaoSelecionadaMenuLateral === 'RetalhosEstoque' ?
+                ''
+                :
+                ''
+            }
+           
         </PainelContainer>
     )
 }

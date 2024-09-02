@@ -13,6 +13,7 @@ height:100%;
 `
 
 function MenuLateral(){
+    
     return(
         <MenuLateralContainer>
             <ListaMenuCalculoChapas/>

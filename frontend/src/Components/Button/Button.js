@@ -34,7 +34,7 @@ const Button = styled.button`
     cursor: pointer;
     text-align:center;
     width: ${props => props.width || '100%'};
-    margin : 0.5rem 0;
+    margin :${props => props.margin || '0.5rem 0'};
     font-family: "Barlow Condensed", system-ui;
   font-weight: 500;
   font-style: normal;

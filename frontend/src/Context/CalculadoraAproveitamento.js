@@ -55,14 +55,17 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         e.preventDefault()
         const resultado = await pegarChapasParaCalculo(MaterialSelecionado,EspessuraSelecionada)
         setDadosResultado(resultado.data)
+        setMedidaA(0)
+        setMedidaB(0)
+        setPeso(0)
+        setMaterialSelecionado('')
+        setEspessuraSelecionada(0)
     }
 
 
 
-
-
     return (
-        <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions}}>
+    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions}}>
       {children}
     </CalculadoraAproveitamentoContext.Provider>
   );
