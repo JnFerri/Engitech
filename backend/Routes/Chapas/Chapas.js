@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { todasChapas,chapaPorId,chapaPorCodigo,chapaPorMaterial,cadastrarChapa,deletarChapaPorId } from "../../Controllers/Chapas.js";
+import { todasChapas,chapaPorId,chapaPorCodigo,chapaPorMaterial,cadastrarChapa,deletarChapaPorId, pegaChapasParaCalculo } from "../../Controllers/Chapas.js";
 
 const router = Router()
 
