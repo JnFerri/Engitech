@@ -6,8 +6,6 @@ import DivLinha from "../../DivLinha/DivLinha.js";
 import DivColuna from "../../DivColuna/DivColuna.js";
 import Label from "../../Label/Label.js";
 import InputForm from "../../InputForm/InputForm.js";
-import Imagem from "../../Imagem/Imagem.js";
-import imagemTeste from '../../../Images/Medidas_chapas.png'
 import SelectForm from "../../SelectForm/SelectForm.js";
 
 

@@ -54,7 +54,7 @@ export const ChapasCadastradasProvider  = ({children}) => {
 
 
     return(
-        <ChapasCadastradasContext.Provider value={{DadosChapasLista, InputPesquisaValor, TipoPesquisaSelecionado, HandleInputPesquisaValor, HandleTipoPesquisaSelecionado, HandlePegaDadosPesquisados , setOpcoesMateriais, OpcoesMateriais , AbrirModalCadastroChapa, FecharModalCadastroChapa, ModalCadastroChapaEstaVisivel  }}>
+        <ChapasCadastradasContext.Provider value={{DadosChapasLista, InputPesquisaValor, TipoPesquisaSelecionado, HandleInputPesquisaValor, HandleTipoPesquisaSelecionado, HandlePegaDadosPesquisados , setOpcoesMateriais, OpcoesMateriais , AbrirModalCadastroChapa, FecharModalCadastroChapa, ModalCadastroChapaEstaVisivel }}>
             {children}
         </ChapasCadastradasContext.Provider>
     )
