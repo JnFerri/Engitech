@@ -17,6 +17,7 @@ router.post('/create', (req,res) => {cadastrarChapa(req,res)})
 
 router.delete('/delete/:id', (req,res) => {deletarChapaPorId(req,res)})
 
+router.patch('/update', (req,res) => {AtualizarChapa(req,res)})
 
 
 export default router

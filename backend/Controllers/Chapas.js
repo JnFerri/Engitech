@@ -13,7 +13,7 @@ async function todasChapas(req,res) {
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json(`erro interno do servidor :  ${err}`)
+        res.status(500).json({message:`erro interno do servidor :  ${err}`})
     }
 }
 
@@ -26,33 +26,33 @@ async function chapaPorId(req,res){
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json(`erro interno do servidor :  ${err}`)
+        res.status(500).json({message:`erro interno do servidor :  ${err}`})
     }
 }
 
 async function chapaPorCodigo(req,res){
     try{
         if(await verificaToken(req)){
-            const [rows] = await DBConnection.promise().query(`select * from chapas where cha_codigo = ${req.params.codigo}`)
+            const [rows] = await DBConnection.promise().query(`select * from chapas join materiais m on chapas.mat_id = m.mat_id where chapas.cha_codigo = ${req.params.codigo}`)
             res.status(200).json(rows)
         }else {
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json(`erro interno do servidor :  ${err}`)
+        res.status(500).json({message:`erro interno do servidor :  ${err}`})
     }
 }
 
 async function chapaPorMaterial(req,res){
 try{
     if(await verificaToken(req)){
-        const [rows] = await DBConnection.promise().query(`select * from chapas where mat_id = ${req.params.mat_id}`)
+        const [rows] = await DBConnection.promise().query(`select * from chapas join materiais m on chapas.mat_id = m.mat_id where chapas.mat_id = ${req.params.mat_id}`)
         res.status(200).json(rows)
     }else {
         res.status(401).json({ message: 'Token inválido.' })
     }
 }catch(err){
-    res.status(500).json(`erro interno do servidor :  ${err}`)
+    res.status(500).json({message:`erro interno do servidor :  ${err}`})
 }
 }
 
@@ -72,7 +72,7 @@ async function cadastrarChapa(req,res){
         }else if (err.code === 'ER_BAD_FIELD_ERROR') {
             res.status(400).json({ message: 'Campo inválido na consulta.' })
         } else {
-            res.status(500).json({ error: `Erro interno do servidor. ${err}` })
+            res.status(500).json({ message: `Erro interno do servidor. ${err}` })
         }
     }
 }
@@ -87,7 +87,7 @@ async function deletarChapaPorId(req,res){
             res.status(401).json({ message: 'Token inválido.' })
         }
 }catch(err){
-    res.status(500).json({ error: `Erro interno do servidor ao deletar chapa. ${err}` })
+    res.status(500).json({ message: `Erro interno do servidor ao deletar chapa. ${err}` })
 }
 }
 
@@ -101,9 +101,24 @@ async function pegaChapasParaCalculo(req,res){
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json({ error: `Erro interno do servidor ao pegar chapas para calculo. ${err}` })
+        res.status(500).json({ message: `Erro interno do servidor ao pegar chapas para calculo. ${err}` })
     }
 }
 
-export {todasChapas , chapaPorId , chapaPorCodigo , chapaPorMaterial , cadastrarChapa , deletarChapaPorId , pegaChapasParaCalculo}
+async function AtualizarChapa(req,res){
+    try{
+        if(await verificaToken(req)){
+            const sql = 'update chapas set cha_codigo = ?, cha_nome = ?, cha_comprimento = ?, cha_altura = ?, cha_espessura = ?, mat_id = ? where cha_id = ?'
+            const filter = [req.body.cha_codigo , req.body.cha_nome , req.body.cha_comprimento , req.body.cha_altura , req.body.cha_espessura , req.body.mat_id , req.body.cha_id]
+            await DBConnection.promise().query(sql, filter)
+            res.status(200).json({ message: 'Chapa atualizada com sucesso.'})
+        }else{
+            res.status(401).json({ message: 'Token inválido.' })
+        }
+    }catch(err){
+        res.status(500).json({ message: `Erro interno do servidor ao atualizar chapa. ${err}` })
+    }
+}
+
+export {todasChapas , chapaPorId , chapaPorCodigo , chapaPorMaterial , cadastrarChapa , deletarChapaPorId , pegaChapasParaCalculo, AtualizarChapa}
     
