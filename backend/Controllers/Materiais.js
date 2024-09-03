@@ -15,7 +15,7 @@ async function todosMateriais(req,res) {
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json(`erro interno do servidor ${err}`)
+        res.status(500).json({message:`erro interno do servidor ${err}`})
     }
 }
 

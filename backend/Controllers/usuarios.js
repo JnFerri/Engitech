@@ -17,7 +17,7 @@ async function todosUsuarios(req,res) {
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json(`erro interno do servidor ${err}`)
+        res.status(500).json( {message:`erro interno do servidor ${err}`})
     }
 }
 
@@ -34,7 +34,7 @@ async function usuarioPorId(req,res) {
         res.status(401).json({ message: 'Token inválido.'  })
     }
     }catch(err){
-        res.status(500).json(`erro interno do servidor ${err}`)
+        res.status(500).json({message:`erro interno do servidor ${err}`})
 }
 }
 
@@ -56,7 +56,7 @@ async function criarUsuario(req,res){
         }else if (err.code === 'ER_BAD_FIELD_ERROR') {
             res.status(400).json({ message: 'Campo inválido na consulta.'})
         } else {
-            res.status(500).json({ error: `Erro interno do servidor. ${err}` })
+            res.status(500).json({ message: `Erro interno do servidor. ${err}` })
         }
     }
     
@@ -73,7 +73,7 @@ async function deletarUsuarioPorId(req,res){
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json({ error: `Erro interno do servidor ao deletar usuario. ${err}` })
+        res.status(500).json({ message: `Erro interno do servidor ao deletar usuario. ${err}` })
     }
 }
 
@@ -88,7 +88,7 @@ async function alterarSenhaUsuario(req,res){
             res.status(401).json({ message: 'Token inválido.' })
         }
     }catch(err){
-        res.status(500).json({ error: `Erro interno do servidor ao alterar senha. ${err}` })
+        res.status(500).json({ message: `Erro interno do servidor ao alterar senha. ${err}` })
     }
 }
 
@@ -107,7 +107,7 @@ async function loginUsuario(req,res){
         }
 }
     catch(err){
-        res.status(500).json({ error: `Erro interno do servidor ao login. ${err}` })
+        res.status(500).json({ message: `Erro interno do servidor ao login. ${err}` })
     }
 }
 
