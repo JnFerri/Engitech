@@ -138,4 +138,32 @@ async function pegarChapasParaCalculo(mat_id,cha_espessura){
     }
 }
 
-    export {pegarTodasChapas , pegarChapaPorId , pegarChapaPorCodigo , pegarChapaPorMaterial, cadastrarChapa , deletarChapaPorId, pegarChapasParaCalculo}
+async function AtualizarChapa(cha_codigo, cha_nome, cha_comprimento, cha_altura, cha_espessura, mat_id, cha_id){
+    try{    
+        const options = {
+            method: 'PATCH',
+            headers : {
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            },
+            body : JSON.stringify({
+                cha_codigo: cha_codigo,
+                cha_nome: cha_nome,
+                cha_comprimento: cha_comprimento,
+                cha_altura: cha_altura,
+                cha_espessura: cha_espessura,
+                mat_id: mat_id,
+                cha_id: cha_id
+            })
+        }
+    
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/update`, options)
+        const data = await result.json()
+        return {data:data , status:result.status}
+    }catch(err){
+        console.error('Erro ao atualizar chapa')
+        throw err
+    }
+}
+
+    export {pegarTodasChapas , pegarChapaPorId , pegarChapaPorCodigo , pegarChapaPorMaterial, cadastrarChapa , deletarChapaPorId, pegarChapasParaCalculo , AtualizarChapa}

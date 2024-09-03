@@ -2,7 +2,8 @@ import styled from "styled-components";
 import FormPesquisaChapas from "./FormPesquisaChapas/FormPesquisaChapas.js";
 import ListaChapas from "./ListaChapas/ListaChapas.js";
 import { useChapasCadastradas } from "../../Context/ChapasCadastradas.js";
-import ModalCadastroChapa from "./ModalCadastroChapa/ModalCadastroChapa.js";
+import ModalChapa from "./ModalChapa/ModalChapa.js";
+
 
 
 const ChapasCadastradasContainer = styled.section`
@@ -16,13 +17,16 @@ margin: 1rem 0;
 
 
 function ChapasCadastradas(){
-    const {ModalCadastroChapaEstaVisivel} = useChapasCadastradas()
+    const {ModalCadastroChapaEstaVisivel , ModalAtualizacaoChapaEstaVisivel} = useChapasCadastradas()
     return(
         
         <ChapasCadastradasContainer>
             {
                 ModalCadastroChapaEstaVisivel ?
-                <ModalCadastroChapa/>
+                <ModalChapa cadastro/>
+                :
+                ModalAtualizacaoChapaEstaVisivel ?
+                <ModalChapa atualizacao/>
                 :
                 <div>
                     <FormPesquisaChapas/>
