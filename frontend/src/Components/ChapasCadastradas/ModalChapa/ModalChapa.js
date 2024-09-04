@@ -9,8 +9,8 @@ import InputForm from "../../InputForm/InputForm.js";
 import SelectForm from "../../SelectForm/SelectForm.js";
 import {useEffect} from 'react'
 import { pegarTodosMateriais } from "../../../Services/Materiais.js";
-import PaginaSucessoCadastro from "../../PaginaSucessoCadastro/PaginaSucessoCadastro.js";
 import Titulo3 from "../../Titulo3/Titulo3.js";
+import PaginaSucesso from "../../PaginaSucesso/PaginaSucesso.js";
 
 const ModalChapaContainer = styled.section`
 position: absolut;
@@ -48,7 +48,7 @@ margin:0.5rem 0.5rem;
 `
 
 function ModalChapa({cadastro, atualizacao}){
-    const {FecharModalCadastroChapa, HandleCodigoCadastroChapa, HandleDescricaoChapaFormModal, HandleComprimentoChapaFormModal, HandleAlturaChapaFormModal, HandleEspessuraChapaFormModal, HandleMaterialChapaFormModal, CadastrarChapa , CodigoChapaFormModal, DescricaoChapaFormModal, ComprimentoChapaFormModal, AlturaChapaFormModal, EspessuraChapaFormModal, MaterialChapaFormModal , OpcoesMateriais , setOpcoesMateriais , PaginaSucessoCadastroEstaAtiva , HandleFecharPaginaSucesso , HandleAtualizarChapa } = useChapasCadastradas()
+    const {FecharModalCadastroChapa, HandleCodigoChapaFormModal, HandleDescricaoChapaFormModal, HandleComprimentoChapaFormModal, HandleAlturaChapaFormModal, HandleEspessuraChapaFormModal, HandleMaterialChapaFormModal, CadastrarChapa , CodigoChapaFormModal, DescricaoChapaFormModal, ComprimentoChapaFormModal, AlturaChapaFormModal, EspessuraChapaFormModal, MaterialChapaFormModal , OpcoesMateriais , setOpcoesMateriais , PaginaSucessoEstaAtiva , HandleFecharPaginaSucesso , HandleAtualizarChapa } = useChapasCadastradas()
 
 
     useEffect(() => {
@@ -73,10 +73,16 @@ function ModalChapa({cadastro, atualizacao}){
             <Titulo3 color="#f58634">{cadastro ? 'Cadastro de Chapa' : 'Atualização de Chapa'}</Titulo3>
             </DivLinha>
             {
-                PaginaSucessoCadastroEstaAtiva ? 
-
-                <PaginaSucessoCadastro handleRetornar = {HandleFecharPaginaSucesso} />
-                :
+                PaginaSucessoEstaAtiva ? 
+                    cadastro ?
+                    <PaginaSucesso cadastro handleRetornar = {HandleFecharPaginaSucesso} mensagemSucesso='Chapa cadastrada com sucesso!' />
+                    :
+                    atualizacao ?
+                    <PaginaSucesso atualizacao mensagemSucesso='Chapa atualizada com sucesso!' />
+                    :
+                    window.alert('Componente pagina de sucesso esta sem tipo definido, informe o administrador do sistema!!')
+                    
+                :  
 
             <ModalContainer>
             <ModalForm 
@@ -94,7 +100,7 @@ function ModalChapa({cadastro, atualizacao}){
             <DivLinha >
                 <DivColuna width='25%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Código da Chapa</Label>
-                    <InputForm type="number" tamanho='medio' width='85%' required onChange={HandleCodigoCadastroChapa} value={CodigoChapaFormModal}></InputForm>
+                    <InputForm type="number" tamanho='medio' width='85%' required onChange={HandleCodigoChapaFormModal} value={CodigoChapaFormModal}></InputForm>
                 </DivColuna>
                 <DivColuna width='70%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Material</Label>
