@@ -8,7 +8,7 @@ const PainelContainer = styled.section`
 display:flex;
 flex-direction:column;
 background-color:#c6cace;
-width: 80%;
+width: 85%;
 height:100%;
 overflow:auto;
 align-items:center;

@@ -8,7 +8,7 @@ flex-direction:column;
 align-items:center;
 justify-content:top;
 background-color:#383838;
-width: 20%;
+width: 15%;
 height:100%;
 `
 
