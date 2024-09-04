@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const LinhaMenuLateral  = styled.li`
     width:100%;
-    background-color: #504d4d;
+    background-color: ${props => props.ativado === true ? '#e5751b' : '#504d4d'};
     padding:10px 0;
     text-align:center;
     color:white;
@@ -14,9 +14,12 @@ const LinhaMenuLateral  = styled.li`
     font-weight: 400;
     font-style: normal;
     font-size: 22px;
+
     &:hover{
-    background-color: #777474;
-    }
+    background-color: #6b6a6a;
+}
 `
+
+
 
 export default LinhaMenuLateral

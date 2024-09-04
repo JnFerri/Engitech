@@ -33,7 +33,7 @@ const FormCalculo = styled.form`
 
 
 function FormCalculoAproveitamento() {
-    const {HandleMedidaA, HandleMedidaB, HandlePeso, HandleMaterialSelecionado, HandleEspessuraSelecionada, EspessuraOptions,MaterialSelecionado,MaterialOptions,setMaterialOptions , HandleSubmit, MedidaA, MedidaB, Peso, EspessuraSelecionada} = useCalculadoraAproveitamento()
+    const {HandleMedidaA, HandleMedidaB, HandlePeso, HandleMaterialSelecionado, HandleEspessuraSelecionada, EspessurasOptions,MaterialSelecionado,MaterialOptions,setMaterialOptions , HandleSubmit, MedidaA, MedidaB, Peso, EspessuraSelecionada} = useCalculadoraAproveitamento()
 
     useEffect(() => {
         async function PegarMateriais(){
@@ -43,7 +43,6 @@ function FormCalculoAproveitamento() {
         PegarMateriais()
     }
     ,[setMaterialOptions])
-
 
 
     return(
@@ -69,7 +68,7 @@ function FormCalculoAproveitamento() {
                         <SelectForm tamanho = "medio" width= '86%' onChange={HandleMaterialSelecionado} value={MaterialSelecionado} required>
                             <option>Selecione o Material</option>
                             {
-                                MaterialOptions ?
+                                MaterialOptions  ?
                                 MaterialOptions.map((dado,index) => (
                                     <option value={dado.mat_id} key={index}>{dado.mat_nome}</option>
                                 ))
@@ -80,13 +79,14 @@ function FormCalculoAproveitamento() {
                     </DivColuna>
                 </DivLinha>
                 <DivLinha>
+                {EspessurasOptions ? 
                 <DivColuna>
                         <Label tamanho = "pequeno">Espessura</Label>
                         <SelectForm tamanho = "medio" width= '86%' onChange={HandleEspessuraSelecionada} value={EspessuraSelecionada} required>
                             <option>Selecione a Espessura</option>
                             {
-                                EspessuraOptions ?
-                                EspessuraOptions.map((dado,index) => (
+                                EspessurasOptions ?
+                                EspessurasOptions.map((dado,index) => (
                                     <option value={dado.cha_espessura} key={index}>{dado.cha_espessura}mm</option>
                                 ))
                                 :
@@ -95,6 +95,9 @@ function FormCalculoAproveitamento() {
                         </SelectForm>
                     
                     </DivColuna>
+                    :
+                    null
+                }
                             <Span width='100%' style={{display:'flex', justifyContent:'center', alignItems:'center' }}>Caso não houver a espessura da peça, significa que não há chapa deste material e espessura cadastradas.</Span>
                 </DivLinha>
                             <Button secundario tamanho='medio' width='60%'>Calcular</Button>

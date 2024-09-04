@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { pegarChapaPorMaterial } from "../Services/Chapas.js";
+import { createContext, useContext, useState } from "react";
+import {  pegarEspessurasChapasPorMaterial } from "../Services/Chapas.js";
 import { pegarChapasParaCalculo } from "../Services/Chapas.js";
 
 
@@ -32,24 +32,23 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setPeso(parseFloat(peso.replace(',', '.')))
     }
 
-    function HandleMaterialSelecionado(e){
+   async function HandleMaterialSelecionado(e){
         setMaterialSelecionado(e.target.value)
+        const resultado = await pegarEspessurasChapasPorMaterial(e.target.value)
+        console.log('teste1')
+        if(resultado.status === 200){
+            console.log('teste2')
+            const espessuras = resultado.data
+            console.log(espessuras)
+            setEspessurasOptions(espessuras)
+        }
     }
 
     function HandleEspessuraSelecionada(e){
         setEspessuraSelecionada(e.target.value)
     }
 
-    useEffect(() => {
-        async function pegarEspessuras(){
-        const resultado = await pegarChapaPorMaterial(MaterialSelecionado)
-        if(resultado.length){
-            const espessuras = resultado
-            setEspessurasOptions(espessuras)
-        }
-        }
-        pegarEspessuras()
-    }, [MaterialSelecionado])
+
 
     async function HandleSubmit(e){
         e.preventDefault()
@@ -65,7 +64,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
 
 
     return (
-    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions}}>
+    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions}}>
       {children}
     </CalculadoraAproveitamentoContext.Provider>
   );

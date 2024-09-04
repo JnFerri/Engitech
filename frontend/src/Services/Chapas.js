@@ -170,4 +170,22 @@ async function AtualizarChapa(cha_codigo, cha_nome, cha_comprimento, cha_altura,
     }
 }
 
-    export {pegarTodasChapas , pegarChapaPorId , pegarChapaPorCodigo , pegarChapaPorMaterial, cadastrarChapa , deletarChapaPorId, pegarChapasParaCalculo , AtualizarChapa}
+async function pegarEspessurasChapasPorMaterial(mat_id){
+    try{
+        const options = {
+            method:'GET',
+            headers : {
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            }
+        }
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/espessuras/${mat_id}`, options)
+        const data = await result.json()
+        return {data:data , status:result.status}
+    }catch(err){
+        console.error('Erro ao pegar espessuras chapas por material')
+        throw err
+    }
+}
+
+    export {pegarTodasChapas , pegarChapaPorId , pegarChapaPorCodigo , pegarChapaPorMaterial, cadastrarChapa , deletarChapaPorId, pegarChapasParaCalculo , AtualizarChapa , pegarEspessurasChapasPorMaterial}

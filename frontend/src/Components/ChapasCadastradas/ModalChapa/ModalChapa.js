@@ -105,10 +105,10 @@ function ModalChapa({cadastro, atualizacao}){
                 <DivColuna width='70%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Material</Label>
                     <SelectForm tamanho='medio' width='100%' required onChange={HandleMaterialChapaFormModal} value={MaterialChapaFormModal}>
-                        <option selected value=''>Selecione o Material</option>
+                        <option value=''>Selecione o Material</option>
                         {
-                            OpcoesMateriais.map(dado => {
-                                return <option value={dado.mat_id}>{dado.mat_nome}</option>
+                            OpcoesMateriais.map((dado, index) => {
+                                return <option key={index} value={dado.mat_id}>{dado.mat_nome}</option>
                             })
                         }
                     </SelectForm>

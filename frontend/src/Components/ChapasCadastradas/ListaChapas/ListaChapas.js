@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useChapasCadastradas } from "../../../Context/ChapasCadastradas.js";
 import Button from "../../Button/Button.js";
-import { useEffect } from "react";
 import tranformarDataString from "../../../Helpers/tranformarDataString.js";
 
 const ListaChapasContainer = styled.section`
@@ -76,9 +75,6 @@ function ListaChapas() {
         mat_fator_densidade: { nome: "Densidade", largura: "10%" },
       };
 
-    useEffect(() => {
-        console.log(DadosChapasLista)
-      },[DadosChapasLista])
 
     return(
         <ListaChapasContainer>

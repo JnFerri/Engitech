@@ -138,6 +138,7 @@ export const ChapasCadastradasProvider  = ({children}) => {
                 setAlturaChapaFormModal(0)
                 setEspessuraChapaFormModal(0)
                 setMaterialChapaFormModal('')
+                HandlePegarTodosDadosChapas()
             }else{
                 window.alert(resultado.data.message)
             }
@@ -156,6 +157,7 @@ export const ChapasCadastradasProvider  = ({children}) => {
        const resultado =  await AtualizarChapa(CodigoChapaFormModal, DescricaoChapaFormModal, ComprimentoChapaFormModal, AlturaChapaFormModal, EspessuraChapaFormModal, MaterialChapaFormModal, idChapaAtualizacao)
        if(resultado.status === 200){
            setPaginaSucessoEstaAtiva(true)
+           HandlePegarTodosDadosChapas()
        }else{
         window.alert(`Algum erro ao atualizar a chapa, ${resultado.data.message} `)
        }
@@ -167,6 +169,7 @@ export const ChapasCadastradasProvider  = ({children}) => {
             const resultado = await deletarChapaPorId(cha_id)
             if(resultado.status === 204){
                 window.alert(resultado.data.message)
+                HandlePegarTodosDadosChapas()
             }else{
                 window.alert(`Algum erro ao deletar chapa : status : ${resultado.status} , message : ${resultado.data.message}`)
             }
