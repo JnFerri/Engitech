@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { todasChapas,chapaPorId,chapaPorCodigo,chapaPorMaterial,cadastrarChapa,deletarChapaPorId, pegaChapasParaCalculo , AtualizarChapa } from "../../Controllers/Chapas.js";
+import { todasChapas,chapaPorId,chapaPorCodigo,chapaPorMaterial,cadastrarChapa,deletarChapaPorId, pegaChapasParaCalculo , AtualizarChapa, PegarEspessurasChapasPorMaterial } from "../../Controllers/Chapas.js";
 
 const router = Router()
 
@@ -18,6 +18,9 @@ router.post('/create', (req,res) => {cadastrarChapa(req,res)})
 router.delete('/delete/:id', (req,res) => {deletarChapaPorId(req,res)})
 
 router.patch('/update', (req,res) => {AtualizarChapa(req,res)})
+
+router.get('/espessuras/:mat_id', (req,res) => {PegarEspessurasChapasPorMaterial(req,res)})
+
 
 
 export default router

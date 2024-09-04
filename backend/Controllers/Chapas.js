@@ -120,5 +120,19 @@ async function AtualizarChapa(req,res){
     }
 }
 
-export {todasChapas , chapaPorId , chapaPorCodigo , chapaPorMaterial , cadastrarChapa , deletarChapaPorId , pegaChapasParaCalculo, AtualizarChapa}
+async function PegarEspessurasChapasPorMaterial(req,res){
+    try{
+        if(await verificaToken(req)){
+            const sql = 'select distinct cha_espessura from chapas where mat_id = ?'
+            const [rows] = await DBConnection.promise().query(sql, [req.params.mat_id])
+            res.status(200).json(rows)
+        }else{
+            res.status(401).json({ message: 'Token inválido.' })
+        }
+    }catch(err){
+        res.status(500).json({ message: `Erro interno do servidor ao pegar espessuras chapas por material. ${err}` })
+    }
+}
+
+export {todasChapas , chapaPorId , chapaPorCodigo , chapaPorMaterial , cadastrarChapa , deletarChapaPorId , pegaChapasParaCalculo, AtualizarChapa, PegarEspessurasChapasPorMaterial}
     
