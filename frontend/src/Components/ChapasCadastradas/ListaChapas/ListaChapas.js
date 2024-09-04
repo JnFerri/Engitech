@@ -62,13 +62,13 @@ const TdTabela = styled.td`
 
 
 function ListaChapas() {
-    const {DadosChapasLista, AbrirModalChapa} = useChapasCadastradas()
+    const {DadosChapasLista, AbrirModalChapa , handleDeletarChapa} = useChapasCadastradas()
     
     const colunas = {
         cha_codigo: { nome: "Código", largura: "5%" },
         cha_nome: { nome: "Nome", largura: "45%" },
-        cha_comprimento: { nome: "Comprimento ", largura: "10%" },
         cha_altura: { nome: "Altura", largura: "10%" },
+        cha_comprimento: { nome: "Comprimento ", largura: "10%" },
         cha_espessura: { nome: "Espessura", largura: "5%" },
         cha_data_hora_criacao: { nome: "Data Criação", largura: "10%" },
         cha_data_hora_atualizacao: { nome: "Data Atualização", largura: "10%" },
@@ -110,7 +110,7 @@ function ListaChapas() {
 
                 </TdTabela>
                 <TdTabela>
-                <Button deletar width='110%' tamanho='pequeno'>Deletar</Button>
+                <Button deletar width='110%' tamanho='pequeno' onClick={() => handleDeletarChapa(item.cha_id)}>Deletar</Button>
 
                 </TdTabela>
               </TrTabela>

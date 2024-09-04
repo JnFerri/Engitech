@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { AtualizarChapa, cadastrarChapa, pegarChapaPorCodigo, pegarChapaPorMaterial, pegarTodasChapas } from "../Services/Chapas.js";
+import { AtualizarChapa, cadastrarChapa, pegarChapaPorCodigo, pegarChapaPorMaterial, pegarTodasChapas ,deletarChapaPorId } from "../Services/Chapas.js";
 
 
 const ChapasCadastradasContext = createContext()
@@ -16,7 +16,7 @@ export const ChapasCadastradasProvider  = ({children}) => {
     const [ComprimentoChapaFormModal, setComprimentoChapaFormModal] = useState(0)
     const [AlturaChapaFormModal, setAlturaChapaFormModal] = useState(0)
     const [EspessuraChapaFormModal, setEspessuraChapaFormModal] = useState(0)
-    const [MaterialChapaFormModal, setMaterialChapaFormModal] = useState(0)
+    const [MaterialChapaFormModal, setMaterialChapaFormModal] = useState('')
     const [PaginaSucessoEstaAtiva, setPaginaSucessoEstaAtiva] = useState(false)
     const [idChapaAtualizacao, setIdChapaAtualizacao] = useState(0)
 
@@ -52,7 +52,6 @@ export const ChapasCadastradasProvider  = ({children}) => {
                 }else if(TipoPesquisaSelecionado === 'material'){
                     const resultado = await pegarChapaPorMaterial(InputPesquisaValor)
                     if(resultado.status === 200){
-                        console.log(resultado.data)
                         setDadosChapasLista(resultado.data)
                     }
             }
@@ -65,7 +64,6 @@ export const ChapasCadastradasProvider  = ({children}) => {
     async function HandlePegarTodosDadosChapas(){
         try{
             const resultado = await pegarTodasChapas()
-            console.log(resultado.data)
             if(resultado.status === 200){
                 setDadosChapasLista(resultado.data)
             }
@@ -139,7 +137,7 @@ export const ChapasCadastradasProvider  = ({children}) => {
                 setComprimentoChapaFormModal(0)
                 setAlturaChapaFormModal(0)
                 setEspessuraChapaFormModal(0)
-                setMaterialChapaFormModal(0)
+                setMaterialChapaFormModal('')
             }else{
                 window.alert(resultado.data.message)
             }
@@ -155,13 +153,29 @@ export const ChapasCadastradasProvider  = ({children}) => {
     
     async function HandleAtualizarChapa(e){
         e.preventDefault()
-        await AtualizarChapa(CodigoChapaFormModal, DescricaoChapaFormModal, ComprimentoChapaFormModal, AlturaChapaFormModal, EspessuraChapaFormModal, MaterialChapaFormModal, idChapaAtualizacao)
-        setPaginaSucessoEstaAtiva(true)
+       const resultado =  await AtualizarChapa(CodigoChapaFormModal, DescricaoChapaFormModal, ComprimentoChapaFormModal, AlturaChapaFormModal, EspessuraChapaFormModal, MaterialChapaFormModal, idChapaAtualizacao)
+       if(resultado.status === 200){
+           setPaginaSucessoEstaAtiva(true)
+       }else{
+        window.alert(`Algum erro ao atualizar a chapa, ${resultado.data.message} `)
+       }
     }
+
+    async function handleDeletarChapa(cha_id){
+        const confirmacao = window.confirm('Atenção : Voce realmente quer excluir a chapa ?')
+        if(confirmacao === true){
+            const resultado = await deletarChapaPorId(cha_id)
+            if(resultado.status === 204){
+                window.alert(resultado.data.message)
+            }else{
+                window.alert(`Algum erro ao deletar chapa : status : ${resultado.status} , message : ${resultado.data.message}`)
+            }
+        }
+        }
 
 
     return(
-        <ChapasCadastradasContext.Provider value={{DadosChapasLista, InputPesquisaValor, TipoPesquisaSelecionado, HandleInputPesquisaValor, HandleTipoPesquisaSelecionado, HandlePegaDadosPesquisados , setOpcoesMateriais, OpcoesMateriais , AbrirModalChapa, FecharModalCadastroChapa, ModalCadastroChapaEstaVisivel , HandleCodigoChapaFormModal , HandleDescricaoChapaFormModal , HandleComprimentoChapaFormModal , HandleAlturaChapaFormModal , HandleEspessuraChapaFormModal , HandleMaterialChapaFormModal , CadastrarChapa , PaginaSucessoEstaAtiva , HandleFecharPaginaSucesso , HandlePegarTodosDadosChapas, HandleAtualizarChapa , ModalAtualizacaoChapaEstaVisivel , CodigoChapaFormModal , DescricaoChapaFormModal , ComprimentoChapaFormModal , AlturaChapaFormModal , EspessuraChapaFormModal , MaterialChapaFormModal }}>
+        <ChapasCadastradasContext.Provider value={{DadosChapasLista, InputPesquisaValor, TipoPesquisaSelecionado, HandleInputPesquisaValor, HandleTipoPesquisaSelecionado, HandlePegaDadosPesquisados , setOpcoesMateriais, OpcoesMateriais , AbrirModalChapa, FecharModalCadastroChapa, ModalCadastroChapaEstaVisivel , HandleCodigoChapaFormModal , HandleDescricaoChapaFormModal , HandleComprimentoChapaFormModal , HandleAlturaChapaFormModal , HandleEspessuraChapaFormModal , HandleMaterialChapaFormModal , CadastrarChapa , PaginaSucessoEstaAtiva , HandleFecharPaginaSucesso , HandlePegarTodosDadosChapas, HandleAtualizarChapa , ModalAtualizacaoChapaEstaVisivel , CodigoChapaFormModal , DescricaoChapaFormModal , ComprimentoChapaFormModal , AlturaChapaFormModal , EspessuraChapaFormModal , MaterialChapaFormModal, handleDeletarChapa }}>
             {children}
         </ChapasCadastradasContext.Provider>
     )

@@ -82,7 +82,7 @@ async function deletarChapaPorId(req,res){
         if(await verificaToken(req)){
             const sql = `delete from chapas where cha_id = ?`
             await DBConnection.promise().query(sql, [req.params.id])
-            res.status(204).json({ message: 'Chapa deletada com sucesso.' })
+            res.status(204).end()
         }else {
             res.status(401).json({ message: 'Token inválido.' })
         }

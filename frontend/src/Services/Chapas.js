@@ -108,8 +108,12 @@ async function deletarChapaPorId(id){
             }
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/chapas/delete/${id}`,options) 
-        const data = await result.json()
-        return {data:data , status:result.status}
+        if(result.status === 204){
+            return {data: {message: 'Chapa deletada com sucesso'} , status:result.status}
+        }else {
+            const data = await result.json()
+            return {data:data , status:result.status}
+        }
     }catch(err){
         console.error('Erro ao deletar chapa')
         throw err

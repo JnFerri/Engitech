@@ -105,7 +105,7 @@ function ModalChapa({cadastro, atualizacao}){
                 <DivColuna width='70%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Material</Label>
                     <SelectForm tamanho='medio' width='100%' required onChange={HandleMaterialChapaFormModal} value={MaterialChapaFormModal}>
-                        <option disabled selected value=''>Selecione o Material</option>
+                        <option selected value=''>Selecione o Material</option>
                         {
                             OpcoesMateriais.map(dado => {
                                 return <option value={dado.mat_id}>{dado.mat_nome}</option>
@@ -124,13 +124,15 @@ function ModalChapa({cadastro, atualizacao}){
 
             <DivLinha >
                 <DivColuna width='33%' margin='0 0.5rem'>
-                    <Label tamanho='pequeno'>Comprimento</Label>
-                    <InputForm type="number" tamanho='medio' width='85%' step='0.01' required onChange={HandleComprimentoChapaFormModal} value={ComprimentoChapaFormModal} placeholder="Comprimento em milimetros"></InputForm>
-                </DivColuna>
-                <DivColuna width='33%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Altura</Label>
                     <InputForm type="number" tamanho='medio' width='85%' step='0.01' required onChange={HandleAlturaChapaFormModal} value={AlturaChapaFormModal} placeholder="Altura em milimetros"></InputForm>
                 </DivColuna>
+
+                <DivColuna width='33%' margin='0 0.5rem'>
+                    <Label tamanho='pequeno'>Comprimento</Label>
+                    <InputForm type="number" tamanho='medio' width='85%' step='0.01' required onChange={HandleComprimentoChapaFormModal} value={ComprimentoChapaFormModal} placeholder="Comprimento em milimetros"></InputForm>
+                </DivColuna>
+                
                 <DivColuna width='33%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Espessura</Label>
                     <InputForm type="number" tamanho='medio' width='85%' step='0.01' required onChange={HandleEspessuraChapaFormModal} value={ EspessuraChapaFormModal} placeholder="Espessura em milimetros"></InputForm>
