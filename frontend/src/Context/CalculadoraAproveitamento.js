@@ -1,13 +1,17 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {  pegarEspessurasChapasPorMaterial } from "../Services/Chapas.js";
 import { pegarChapasParaCalculo } from "../Services/Chapas.js";
-
+import calculaMaximoDePecasChapa from "../Helpers/calculaMaximoDePecasChapa.js";
+import calculaInformacoesResultado from "../Helpers/calculaInformacoesResultados.js";
+import criaRetangulosPosicionamentos from "../Helpers/criaRetangulosPosicionamentos.js";
+import ordenarChapasPorMenorPerda from "../Helpers/ordenarChapasMenorPerda.js";
 
 
 const CalculadoraAproveitamentoContext = createContext()
 
 
 export const CalculadoraAproveitamentoProvider = ({children}) => {
+    const MedidaBordaSegurancaChapa = 10
     const [MedidaA, setMedidaA] = useState(0)
     const [MedidaB, setMedidaB] = useState(0)
     const [Peso, setPeso] = useState(0)
@@ -16,6 +20,18 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     const [MaterialOptions, setMaterialOptions] =useState([])
     const [EspessuraSelecionada, setEspessuraSelecionada] = useState(0)
     const [DadosResultado, setDadosResultado] = useState([])
+    const [QuantidadesPecasChapa, setQuantidadesPecasChapa] = useState([]) 
+    const [RetangulosPosicionamentoHorizontal, setRetangulosPosicionamentoHorizontal] = useState([])
+    const [RetangulosPosicionamentoVertical, setRetangulosPosicionamentoVertical] = useState([])
+    const [RetangulosPosicionamentoMaximoHorizontal, setRetangulosPosicionamentoMaximoHorizontal] = useState([])
+    const [RetangulosPosicionamentoMaximoVertical, setRetagulosPosicionamentoMaximoVertical] = useState([])
+    const [AlturaChapaVisualizacao, setAlturaChapaVisualizacao] = useState(0)
+    const [ComprimentoChapaVisualizacao, setComprimentoChapaVisualizacao] = useState(0)
+    const [DadosChapaVisualizacao, setDadosChapaVisualizacao] = useState({})
+    const [ModalVisualizacaoEstaVisivel , setModalVisualizacaoEstaVisivel] = useState(false)
+    const [MedidaAPecaEmResultado, setMedidaAPecaEmResultado] = useState(0)
+    const [MedidaBPecaEmResultado, setMedidaBPecaEmResultado] = useState(0)
+
 
     function HandleMedidaA(e){
         let medida = e.target.value
@@ -35,11 +51,8 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
    async function HandleMaterialSelecionado(e){
         setMaterialSelecionado(e.target.value)
         const resultado = await pegarEspessurasChapasPorMaterial(e.target.value)
-        console.log('teste1')
-        if(resultado.status === 200){
-            console.log('teste2')
+        if(resultado.status === 200){  
             const espessuras = resultado.data
-            console.log(espessuras)
             setEspessurasOptions(espessuras)
         }
     }
@@ -48,12 +61,48 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setEspessuraSelecionada(e.target.value)
     }
 
+   /* useEffect(() => {
+        if(ordenarChapasPorMenorPerda(DadosResultado) !== DadosResultado){
+            setDadosResultado(ordenarChapasPorMenorPerda(DadosResultado))
+        }   
+    }, [DadosResultado])*/
+
+    useEffect(() => {
+        console.log(DadosResultado)
+    }, [DadosResultado])
 
 
     async function HandleSubmit(e){
         e.preventDefault()
+        setMedidaAPecaEmResultado(0)
+        setMedidaBPecaEmResultado(0)
+
+        setQuantidadesPecasChapa([])
+
         const resultado = await pegarChapasParaCalculo(MaterialSelecionado,EspessuraSelecionada)
-        setDadosResultado(resultado.data)
+        const resultadoDados = resultado.data
+        for(let i = 0; i < resultadoDados.length;i++){
+
+
+            const quantidadePecas = await calculaMaximoDePecasChapa(
+                resultadoDados[i],
+                MedidaA,
+                MedidaB,
+                MedidaBordaSegurancaChapa
+            );
+            
+            // Atualiza o estado de forma funcional, garantindo o valor correto de cada iteração
+            setQuantidadesPecasChapa((prevQuantidades) => [...prevQuantidades, quantidadePecas]);
+            
+            
+            const DadosTotaisChapas = await calculaInformacoesResultado(resultadoDados[i], quantidadePecas, Peso)
+
+            setDadosResultado((ValorAnnteriorDadosResultado) => [...ValorAnnteriorDadosResultado , DadosTotaisChapas])
+            
+               
+            }
+        setMedidaAPecaEmResultado(MedidaA)
+        setMedidaBPecaEmResultado(MedidaB)
         setMedidaA(0)
         setMedidaB(0)
         setPeso(0)
@@ -61,10 +110,39 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setEspessuraSelecionada(0)
     }
 
+    async function AbreVisualizacaoCriaRetangulosPosicionamentos(dadoChapa){
+        setDadosChapaVisualizacao(dadoChapa)
 
+        const resultadosPosicionamentos = await criaRetangulosPosicionamentos(dadoChapa , MedidaAPecaEmResultado , MedidaBPecaEmResultado , MedidaBordaSegurancaChapa)
+        
+        
+        setAlturaChapaVisualizacao(dadoChapa.cha_altura)
+        setComprimentoChapaVisualizacao(dadoChapa.cha_comprimento) 
+
+        console.log(resultadosPosicionamentos)
+        setRetangulosPosicionamentoHorizontal(resultadosPosicionamentos.retangulosHorizontalResultado)
+        setRetangulosPosicionamentoVertical(resultadosPosicionamentos.retangulosVerticalResultado)
+        setRetangulosPosicionamentoMaximoHorizontal(resultadosPosicionamentos.retangulosHorizontalMaximoResultado)
+        setRetagulosPosicionamentoMaximoVertical(resultadosPosicionamentos.retangulosVerticalMaximoResultado)
+
+        setModalVisualizacaoEstaVisivel(true)
+    }
+
+    function FechaModalVisualizacao(){
+        setAlturaChapaVisualizacao(0)
+        setComprimentoChapaVisualizacao(0)
+        setRetangulosPosicionamentoHorizontal([])
+        setRetangulosPosicionamentoVertical([])
+        setRetangulosPosicionamentoMaximoHorizontal([])
+        setRetagulosPosicionamentoMaximoVertical([])
+        setDadosChapaVisualizacao({})
+        setModalVisualizacaoEstaVisivel(false)
+    }
+
+    
 
     return (
-    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions}}>
+    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoHorizontal , RetangulosPosicionamentoMaximoVertical}}>
       {children}
     </CalculadoraAproveitamentoContext.Provider>
   );
