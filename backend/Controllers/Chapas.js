@@ -94,8 +94,8 @@ async function deletarChapaPorId(req,res){
 async function pegaChapasParaCalculo(req,res){
     try{
         if(await verificaToken(req)){
-            const sql = 'select * from chapas join materiais m on chapas.mat_id = m.mat_id where mat_id = ? and cha_espessura = ?'
-            const [rows] = await DBConnection.promise.query(sql, [req.params.mat_id, req.params.cha_espessura])
+            const sql = 'select * from chapas join materiais m on chapas.mat_id = m.mat_id where chapas.mat_id = ? and chapas.cha_espessura = ?'
+            const [rows] = await DBConnection.promise().query(sql, [req.body.mat_id, req.body.cha_espessura])
             res.status(200).json(rows)
         }else{
             res.status(401).json({ message: 'Token inválido.' })
