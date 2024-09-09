@@ -1,43 +1,69 @@
-async function calculaMaximoDePecasChapa(DadosChapa, MedidaA, MedidaB , MedidaBordaSeguranca) {
-    
-        // Opção 1: Todas as peças na orientação padrão (MedidaA x MedidaB)
-        const horizontalFit = Math.floor((DadosChapa.cha_altura - MedidaBordaSeguranca) / MedidaA) * Math.floor((DadosChapa.cha_comprimento - MedidaBordaSeguranca) / MedidaB);
-        
-        // Opção 2: Todas as peças rotacionadas (MedidaB x MedidaA)
-        const verticalFit = Math.floor((DadosChapa.cha_altura - MedidaBordaSeguranca) / MedidaB) * Math.floor((DadosChapa.cha_comprimento - MedidaBordaSeguranca) / MedidaA);
-    
-        // Opção 3: Combinação de orientações (Horizontal primeiro, depois vertical)
-        let maxFitHorizontalFirst = 0;
-    
-        for (let i = 0; i <= Math.floor(DadosChapa.cha_altura / MedidaA); i++) {
-            const remainingHeight = (DadosChapa.cha_altura - MedidaBordaSeguranca) - i * MedidaA;
-            const piecesInWidth = i * Math.floor((DadosChapa.cha_comprimento - MedidaBordaSeguranca) / MedidaB);
-            const piecesInRemainingHeight = Math.floor(remainingHeight / MedidaB) * Math.floor( (DadosChapa.cha_comprimento - MedidaBordaSeguranca) / MedidaA);
-            maxFitHorizontalFirst = Math.max(maxFitHorizontalFirst, piecesInWidth + piecesInRemainingHeight);
-        }
-    
-        // Opção 4: Combinação de orientações (Vertical primeiro, depois horizontal)
-        let maxFitVerticalFirst = 0;
-    
-        for (let i = 0; i <= Math.floor( (DadosChapa.cha_comprimento - MedidaBordaSeguranca) / MedidaB); i++) {
-            const remainingWidth = (DadosChapa.cha_comprimento - MedidaBordaSeguranca) - i * MedidaB;
-            const piecesInHeight = i * Math.floor(DadosChapa.cha_altura / MedidaA);
-            const piecesInRemainingWidth = Math.floor(remainingWidth / MedidaA) * Math.floor((DadosChapa.cha_altura - MedidaBordaSeguranca) / MedidaB);
-            maxFitVerticalFirst = Math.max(maxFitVerticalFirst, piecesInHeight + piecesInRemainingWidth);
-        }
-    
-        // Retorna o maior valor entre todas as abordagens
-    
-        const retorno = {
-            horizontal : horizontalFit,
-            vertical : verticalFit,
-            maximoHorizontalPrimeiro : maxFitHorizontalFirst,
-            maximoVericalPrimeiro : maxFitVerticalFirst
-        }
-    
-        return retorno
+async function calculaMaximoDePecasChapa(DadosChapa, MedidaA, MedidaB, MedidaBordaSeguranca) {
 
-    
+    const larguraUtil = DadosChapa.cha_comprimento - MedidaBordaSeguranca;
+    const alturaUtil = DadosChapa.cha_altura - MedidaBordaSeguranca;
+
+    // Opção 1: Todas as peças na orientação padrão (MedidaA x MedidaB)
+    const horizontalFit = Math.floor(alturaUtil / MedidaA) * Math.floor(larguraUtil / MedidaB);
+
+    // Opção 2: Todas as peças rotacionadas (MedidaB x MedidaA)
+    const verticalFit = Math.floor(alturaUtil / MedidaB) * Math.floor(larguraUtil / MedidaA);
+
+    // Opção 3: Mistura de orientações, iniciando com horizontal e depois vertical
+    let maxFitHorizontalFirst = 0;
+    let horizontalFirstPosition = { horizontal: 0, vertical: 0 };
+
+    for (let i = 0; i <= Math.floor(alturaUtil / MedidaA); i++) {
+        const remainingHeight = alturaUtil - i * MedidaA;
+        const piecesInWidth = i * Math.floor(larguraUtil / MedidaB);
+        const piecesInRemainingHeight = Math.floor(remainingHeight / MedidaB) * Math.floor(larguraUtil / MedidaA);
+        const totalPieces = piecesInWidth + piecesInRemainingHeight;
+
+        if (totalPieces > maxFitHorizontalFirst) {
+            maxFitHorizontalFirst = totalPieces;
+            horizontalFirstPosition = { horizontal: piecesInWidth, vertical: piecesInRemainingHeight };
+        }
+    }
+
+    // Opção 4: Mistura de orientações, iniciando com vertical e depois horizontal
+    let maxFitVerticalFirst = 0;
+    let verticalFirstPosition = { horizontal: 0, vertical: 0 };
+
+    for (let i = 0; i <= Math.floor(larguraUtil / MedidaB); i++) {
+        const remainingWidth = larguraUtil - i * MedidaB;
+        const piecesInHeight = i * Math.floor(alturaUtil / MedidaA);
+        const piecesInRemainingWidth = Math.floor(remainingWidth / MedidaA) * Math.floor(alturaUtil / MedidaB);
+        const totalPieces = piecesInHeight + piecesInRemainingWidth;
+
+        if (totalPieces > maxFitVerticalFirst) {
+            maxFitVerticalFirst = totalPieces;
+            verticalFirstPosition = { horizontal: piecesInHeight , vertical: piecesInRemainingWidth};
+        }
+    }
+
+    // Verifica qual é a melhor abordagem
+    let maxFitMisturado = 0;
+    let melhorPosicao = '';
+    let melhorDistribuicao = {};
+
+    if (maxFitHorizontalFirst > maxFitVerticalFirst) {
+        maxFitMisturado = maxFitHorizontalFirst;
+        melhorPosicao = 'Iniciado com Vertical';
+        melhorDistribuicao = horizontalFirstPosition;
+    } else {
+        maxFitMisturado = maxFitVerticalFirst;
+        melhorPosicao = 'Iniciado com Horizontal';
+        melhorDistribuicao = verticalFirstPosition;
+    }
+
+    // Retorna o valor de todas as abordagens
+    return {
+        horizontal: horizontalFit,
+        vertical: verticalFit,
+        maxMisturado: maxFitMisturado,
+        melhorPosicao: melhorPosicao,
+        distribuicao: melhorDistribuicao
+    };
 }
 
-export default calculaMaximoDePecasChapa
+export default calculaMaximoDePecasChapa;

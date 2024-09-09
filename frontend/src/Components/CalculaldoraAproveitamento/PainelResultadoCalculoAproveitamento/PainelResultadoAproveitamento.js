@@ -57,7 +57,7 @@ function PainelResultadoAproveitamento(){
                         <DivLinha margin='0.5rem 0'>
                         <DivColuna width='95%'>
                                 <Label tamanho = "pequeno">Menor Perda na Chapa</Label>
-                                <Span>{Math.min(parseFloat(dado.perda_horizontal) , parseFloat(dado.perda_vertical), parseFloat(dado.perda_horizontal_maximo) , parseFloat(dado.perda_vertical_maximo) )} %</Span>
+                                <Span>{Math.min(parseFloat(dado.perda_horizontal) , parseFloat(dado.perda_vertical), parseFloat(dado.perda_misturado) )} %</Span>
                             </DivColuna>
                         </DivLinha>
                     </ItemResultadoContainer>

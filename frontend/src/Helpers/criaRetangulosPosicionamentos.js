@@ -2,15 +2,18 @@ import MaxRectsBinPack from 'rects-bin-pack'
 
 async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBordaSeguranca){
     
+    
+    
     const retangulosHorizontal = []
     const retangulosVertical = []
-    const retangulosHorizontalMaximo = []
+    const retangulosMaximo = []
     const retangulosVerticalMaximo = []
-
+    
     let resultadoHorizontal = []
     let resultadoVertical = []
-    let resultadoMaximoHorizontalPrimeiro = []
+    let resultadoMaximoMisturado = []
     let resultadoMaximoVerticalPrimeiro = []
+
 
     // Criando retângulos na orientação horizontal
     if (dadosChapa.quantidade_pecas_horizontal > 0) {
@@ -26,7 +29,7 @@ async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , Med
         const pack = new MaxRectsBinPack.MaxRectsBinPack(
             dadosChapa.cha_comprimento - MedidaBordaSeguranca, 
             dadosChapa.cha_altura - MedidaBordaSeguranca, 
-            true
+            false
         )
         
         // Inserindo cada retângulo individualmente
@@ -49,7 +52,7 @@ async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , Med
         const pack = new MaxRectsBinPack.MaxRectsBinPack(
             dadosChapa.cha_comprimento - MedidaBordaSeguranca, 
             dadosChapa.cha_altura - MedidaBordaSeguranca, 
-            true
+            false
         )
         
         // Inserindo cada retângulo individualmente
@@ -58,15 +61,26 @@ async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , Med
         
 
     // Criando retângulos para o máximo horizontal primeiro
-    if (dadosChapa.quantidade_pecas_horizontal_maxima > 0) {
-        for (let i = 0; i < dadosChapa.quantidade_pecas_horizontal_maxima; i++) {
-            const retangle = {
-                width: MedidaB,
-                height: MedidaA,
-                id : i
+    if (dadosChapa.quantidade_maximo_misturado > 0) {
+        
+            for (let i = 0; i < dadosChapa.distribuicaoMisturado.horizontal; i++) {
+                const retangle = {
+                    width: MedidaB,
+                    height: MedidaA,
+                    
+                }
+                retangulosMaximo.push(retangle)
             }
-            retangulosHorizontalMaximo.push(retangle)
-        }
+    
+            for (let i = 0; i < dadosChapa.distribuicaoMisturado.vertical; i++) {
+                const retangle = {
+                    width: MedidaA,
+                    height: MedidaB,
+                    
+                }
+                retangulosMaximo.push(retangle)
+            }
+    
 
         const pack = new MaxRectsBinPack.MaxRectsBinPack(
             dadosChapa.cha_comprimento - MedidaBordaSeguranca, 
@@ -74,14 +88,14 @@ async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , Med
             true
         )
         
-            
-           resultadoMaximoHorizontalPrimeiro = pack.insert2(retangulosHorizontalMaximo, MaxRectsBinPack.BestAreaFit)
+        
+           resultadoMaximoMisturado = pack.insert2(retangulosMaximo, MaxRectsBinPack.BestAreaFit)
         
     }
-
-    // Criando retângulos para o máximo quantidade_pecas_vertical primeiro
-    if (dadosChapa.quantidade_pecas_vertical_maxima > 0) {
-        for (let i = 0; i < dadosChapa.quantidade_pecas_vertical_maxima; i++) {
+ 
+   /* // Criando retângulos para o máximo quantidade_pecas_vertical primeiro
+    if (dadosChapa.quantidade_pecas_vertical_maximo > 0) {
+        for (let i = 0; i < dadosChapa.quantidade_pecas_vertical_maximo; i++) {
             const retangle = {
                 width: MedidaA,
                 height: MedidaB,
@@ -95,17 +109,16 @@ async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , Med
             dadosChapa.cha_altura - MedidaBordaSeguranca, 
             true
         )
-        
-        resultadoMaximoVerticalPrimeiro =  pack.insert2(retangulosVerticalMaximo, MaxRectsBinPack.BestAreaFit)
-        
-    }
+       
+        resultadoMaximoVerticalPrimeiro =  pack.insert2(retangulosVerticalMaximo, MaxRectsBinPack.BestShortSideFit)
+    
+    }*/
 
     // Retornando todos os resultados
     return {
         retangulosHorizontalResultado : resultadoHorizontal,
         retangulosVerticalResultado : resultadoVertical,
-        retangulosHorizontalMaximoResultado : resultadoMaximoHorizontalPrimeiro,
-        retangulosVerticalMaximoResultado : resultadoMaximoVerticalPrimeiro
+        retangulosMaximoMisturadoResultado : resultadoMaximoMisturado
     }
 }
     export default criaRetangulosPosicionamentos

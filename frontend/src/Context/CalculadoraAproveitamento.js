@@ -23,8 +23,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     const [QuantidadesPecasChapa, setQuantidadesPecasChapa] = useState([]) 
     const [RetangulosPosicionamentoHorizontal, setRetangulosPosicionamentoHorizontal] = useState([])
     const [RetangulosPosicionamentoVertical, setRetangulosPosicionamentoVertical] = useState([])
-    const [RetangulosPosicionamentoMaximoHorizontal, setRetangulosPosicionamentoMaximoHorizontal] = useState([])
-    const [RetangulosPosicionamentoMaximoVertical, setRetagulosPosicionamentoMaximoVertical] = useState([])
+    const [RetangulosPosicionamentoMaximoMisturado, setRetangulosPosicionamentoMaximoMisturado] = useState([])
     const [AlturaChapaVisualizacao, setAlturaChapaVisualizacao] = useState(0)
     const [ComprimentoChapaVisualizacao, setComprimentoChapaVisualizacao] = useState(0)
     const [DadosChapaVisualizacao, setDadosChapaVisualizacao] = useState({})
@@ -69,7 +68,8 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
 
     useEffect(() => {
         console.log(DadosResultado)
-    }, [DadosResultado])
+        console.log(QuantidadesPecasChapa)
+    }, [DadosResultado, QuantidadesPecasChapa])
 
 
     async function HandleSubmit(e){
@@ -122,8 +122,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         console.log(resultadosPosicionamentos)
         setRetangulosPosicionamentoHorizontal(resultadosPosicionamentos.retangulosHorizontalResultado)
         setRetangulosPosicionamentoVertical(resultadosPosicionamentos.retangulosVerticalResultado)
-        setRetangulosPosicionamentoMaximoHorizontal(resultadosPosicionamentos.retangulosHorizontalMaximoResultado)
-        setRetagulosPosicionamentoMaximoVertical(resultadosPosicionamentos.retangulosVerticalMaximoResultado)
+        setRetangulosPosicionamentoMaximoMisturado(resultadosPosicionamentos.retangulosMaximoMisturadoResultado)
 
         setModalVisualizacaoEstaVisivel(true)
     }
@@ -133,8 +132,8 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setComprimentoChapaVisualizacao(0)
         setRetangulosPosicionamentoHorizontal([])
         setRetangulosPosicionamentoVertical([])
-        setRetangulosPosicionamentoMaximoHorizontal([])
-        setRetagulosPosicionamentoMaximoVertical([])
+        setRetangulosPosicionamentoMaximoMisturado([])
+        
         setDadosChapaVisualizacao({})
         setModalVisualizacaoEstaVisivel(false)
     }
@@ -142,7 +141,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     
 
     return (
-    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoHorizontal , RetangulosPosicionamentoMaximoVertical}}>
+    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoMisturado}}>
       {children}
     </CalculadoraAproveitamentoContext.Provider>
   );

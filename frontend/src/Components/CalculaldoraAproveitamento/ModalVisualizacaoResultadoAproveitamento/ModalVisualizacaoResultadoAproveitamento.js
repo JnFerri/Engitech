@@ -43,7 +43,7 @@ const SecaoVisualizacaoResultadosChapas = styled.div`
     width:95%;
     display:flex;
     align-items:center;
-    justify-content:space-between;
+    justify-content:center;
     border-bottom:1px black solid;
     margin:1rem 0;
     padding:1rem 0;
@@ -54,7 +54,7 @@ const SecaoVisualizacaoResultadosChapas = styled.div`
 
 
 function ModalVisualizacaoResultadoAproveitamento(){
-    const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoHorizontal, RetangulosPosicionamentoMaximoVertical, FechaModalVisualizacao} = useCalculadoraAproveitamento()
+    const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoMisturado, FechaModalVisualizacao} = useCalculadoraAproveitamento()
 
     useEffect(() => {
         console.log(RetangulosPosicionamentoHorizontal)
@@ -90,13 +90,16 @@ function ModalVisualizacaoResultadoAproveitamento(){
             <Titulo2>Dados Aproveitamentos em Cada Posição</Titulo2>
             {RetangulosPosicionamentoHorizontal.length ? 
             <SecaoVisualizacaoResultadosChapas>
-                <DivColuna width='30%'>
+                <DivColuna width='40%'>
                     <Titulo3>Posição Horizontal</Titulo3>
                     <DivLinha margin  ='0.5rem 0'>
                         <Span>Percentual de Perda Horizontal : {DadosChapaVisualizacao.perda_horizontal} % </Span>
                     </DivLinha>
                         <DivLinha margin  ='0.5rem 0'>
                         <Span>Quantidade de Pecas Horizontal : {DadosChapaVisualizacao.quantidade_pecas_horizontal}</Span>
+                        </DivLinha>
+                        <DivLinha margin  ='0.5rem 0'>
+                        <Span>Valor em Und para Ficha : {(DadosChapaVisualizacao.valor_und).toFixed(6)}</Span>
                         </DivLinha>
                 </DivColuna>
                 <DivColuna width='70%'>
@@ -108,7 +111,7 @@ function ModalVisualizacaoResultadoAproveitamento(){
             }
             {RetangulosPosicionamentoVertical.length ? 
             <SecaoVisualizacaoResultadosChapas>
-                <DivColuna width='30%'>
+                <DivColuna width='40%'>
                     <Titulo3>Posição Vertical</Titulo3>
                     <DivLinha margin  ='0.5rem 0'>
                         <Span>Percentual de Perda Vertical : {DadosChapaVisualizacao.perda_vertical} % </Span>
@@ -116,9 +119,36 @@ function ModalVisualizacaoResultadoAproveitamento(){
                         <DivLinha margin  ='0.5rem 0'>
                         <Span>Quantidade de Pecas Vertical : {DadosChapaVisualizacao.quantidade_pecas_vertical}</Span>
                         </DivLinha>
+                        <DivLinha margin  ='0.5rem 0'>
+                        <Span>Valor em Und para Ficha : {(DadosChapaVisualizacao.valor_und).toFixed(6)}</Span>
+                        </DivLinha>
                 </DivColuna>
                 <DivColuna width='70%'>
                     <VisualizacaoChapas  retangulos={RetangulosPosicionamentoVertical} alturaChapa={DadosChapaVisualizacao.cha_altura} comprimentoChapa={DadosChapaVisualizacao.cha_comprimento}/>
+                </DivColuna>
+                    
+            </SecaoVisualizacaoResultadosChapas>
+            : null
+            }
+            {RetangulosPosicionamentoMaximoMisturado.length ? 
+            <SecaoVisualizacaoResultadosChapas>
+                <DivColuna width='40%'>
+                    <Titulo3>Posição Misturado Máximo</Titulo3>
+                    <DivLinha margin  ='0.5rem 0'>
+                        <Span>Percentual de Perda Horizontal Máximo : {DadosChapaVisualizacao.perda_misturado} % </Span>
+                    </DivLinha>
+                        <DivLinha margin  ='0.5rem 0'>
+                        <Span>Quantidade de Pecas Horizontal Máximo: {DadosChapaVisualizacao.quantidade_maximo_misturado}</Span>
+                        </DivLinha>
+                        <DivLinha margin  ='0.5rem 0'>
+                        <Span>Distribuição: {DadosChapaVisualizacao.distribuicaoMisturado.vertical} peça na vertical e {DadosChapaVisualizacao.distribuicaoMisturado.horizontal} peça na horizontal.</Span>
+                        </DivLinha>
+                        <DivLinha margin  ='0.5rem 0'>
+                        <Span>Valor em Und para Ficha : {(DadosChapaVisualizacao.valor_und).toFixed(6)}</Span>
+                        </DivLinha>
+                </DivColuna>
+                <DivColuna width='70%'>
+                    <VisualizacaoChapas  retangulos={RetangulosPosicionamentoMaximoMisturado} alturaChapa={DadosChapaVisualizacao.cha_altura} comprimentoChapa={DadosChapaVisualizacao.cha_comprimento}/>
                 </DivColuna>
                     
             </SecaoVisualizacaoResultadosChapas>
