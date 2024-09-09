@@ -57,8 +57,8 @@ function ModalVisualizacaoResultadoAproveitamento(){
     const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoMisturado, FechaModalVisualizacao} = useCalculadoraAproveitamento()
 
     useEffect(() => {
-        console.log(RetangulosPosicionamentoHorizontal)
-    }, [RetangulosPosicionamentoHorizontal])
+        console.log(RetangulosPosicionamentoMaximoMisturado)
+    }, [RetangulosPosicionamentoMaximoMisturado])
     
     return(
         <Overlay>

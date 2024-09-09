@@ -3,7 +3,6 @@
 async function calculaInformacoesResultado(DadosChapa, DadosQuantidades, PesoPeca ){
 
     const pesoTotalChapa = (DadosChapa.cha_comprimento * DadosChapa.cha_altura * Number(DadosChapa.cha_espessura) * Number(DadosChapa.mat_fator_densidade)) /1000
-    console.log(DadosChapa,pesoTotalChapa)
     const pesoPecaPosicaoHorizontal = (PesoPeca * DadosQuantidades.horizontal)
 
     const pesoPecaPosicaoVertical = (PesoPeca * DadosQuantidades.vertical)

@@ -4,6 +4,7 @@ import DivLinha from "../../DivLinha/DivLinha.js";
 import DivColuna from "../../DivColuna/DivColuna.js";
 import Label from "../../Label/Label.js";
 import Span from "../../Span/Span.js";
+import ordenarChapasPorMenorPerda from "../../../Helpers/ordenarChapasMenorPerda.js";
 
 
 const PainelResultadoAproveitamentoContainer = styled.section`
@@ -40,7 +41,7 @@ function PainelResultadoAproveitamento(){
         <PainelResultadoAproveitamentoContainer>
             {
                 DadosResultado.length > 0 &&
-                DadosResultado.map((dado,index) => (
+                ordenarChapasPorMenorPerda(DadosResultado).map((dado,index) => (
                     <ItemResultadoContainer key={index} index={index} onClick={async () => await AbreVisualizacaoCriaRetangulosPosicionamentos(dado)}>
                         <DivLinha style={{width:'100%' , backgroundColor :'#314159'}}>
                             <DivColuna width='95%'>

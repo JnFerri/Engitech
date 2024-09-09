@@ -60,11 +60,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setEspessuraSelecionada(e.target.value)
     }
 
-   /* useEffect(() => {
-        if(ordenarChapasPorMenorPerda(DadosResultado) !== DadosResultado){
-            setDadosResultado(ordenarChapasPorMenorPerda(DadosResultado))
-        }   
-    }, [DadosResultado])*/
+   
 
     useEffect(() => {
         console.log(DadosResultado)
@@ -76,6 +72,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         e.preventDefault()
         setMedidaAPecaEmResultado(0)
         setMedidaBPecaEmResultado(0)
+        setDadosResultado([])
 
         setQuantidadesPecasChapa([])
 
@@ -101,6 +98,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
             
                
             }
+
         setMedidaAPecaEmResultado(MedidaA)
         setMedidaBPecaEmResultado(MedidaB)
         setMedidaA(0)
@@ -119,7 +117,6 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setAlturaChapaVisualizacao(dadoChapa.cha_altura)
         setComprimentoChapaVisualizacao(dadoChapa.cha_comprimento) 
 
-        console.log(resultadosPosicionamentos)
         setRetangulosPosicionamentoHorizontal(resultadosPosicionamentos.retangulosHorizontalResultado)
         setRetangulosPosicionamentoVertical(resultadosPosicionamentos.retangulosVerticalResultado)
         setRetangulosPosicionamentoMaximoMisturado(resultadosPosicionamentos.retangulosMaximoMisturadoResultado)

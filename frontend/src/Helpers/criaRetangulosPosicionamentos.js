@@ -1,6 +1,6 @@
 import MaxRectsBinPack from 'rects-bin-pack'
 
-async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBordaSeguranca){
+function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBordaSeguranca){
     
     
     
@@ -63,33 +63,37 @@ async function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , Med
     // Criando retângulos para o máximo horizontal primeiro
     if (dadosChapa.quantidade_maximo_misturado > 0) {
         
-            for (let i = 0; i < dadosChapa.distribuicaoMisturado.horizontal; i++) {
-                const retangle = {
-                    width: MedidaB,
-                    height: MedidaA,
-                    
-                }
-                retangulosMaximo.push(retangle)
-            }
+
     
-            for (let i = 0; i < dadosChapa.distribuicaoMisturado.vertical; i++) {
-                const retangle = {
-                    width: MedidaA,
-                    height: MedidaB,
-                    
-                }
-                retangulosMaximo.push(retangle)
+            
+        for (let i = 0; i < dadosChapa.distribuicaoMisturado.vertical; i++) {
+            const retangle = {
+                width: MedidaA,
+                height: MedidaB,
+                
             }
+            retangulosMaximo.push(retangle)
+        }
+        for (let i = 0; i < dadosChapa.distribuicaoMisturado.horizontal; i++) {
+            const retangle = {
+                width: MedidaB,
+                height: MedidaA,
+                
+            }
+            retangulosMaximo.push(retangle)
+        }
+    
     
 
         const pack = new MaxRectsBinPack.MaxRectsBinPack(
             dadosChapa.cha_comprimento - MedidaBordaSeguranca, 
             dadosChapa.cha_altura - MedidaBordaSeguranca, 
-            true
+            false
         )
+
+            console.log(retangulosMaximo.map(dado => dado))
         
-        
-           resultadoMaximoMisturado = pack.insert2(retangulosMaximo, MaxRectsBinPack.BestAreaFit)
+           resultadoMaximoMisturado = pack.insert2(retangulosMaximo, MaxRectsBinPack.BottomLeftRule)
         
     }
  
