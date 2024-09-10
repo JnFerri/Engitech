@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CalculadoraAproveitamento from "../CalculaldoraAproveitamento/CalculadoraAproveitamento.js";
 import { useMenuLateral } from "../../Context/MenuLateral.js";
 import ChapasCadastradas from "../ChapasCadastradas/ChapasCadastradas.js";
+import TodosUsuarios from "../TodosUsuarios/TodosUsuarios.js";
 
 
 const PainelContainer = styled.section`
@@ -28,6 +29,9 @@ function PainelUtilizacao(){
                 :
                 OpcaoSelecionadaMenuLateral === 'RetalhosEstoque' ?
                 ''
+                :
+                OpcaoSelecionadaMenuLateral === 'TodosUsuarios' ?
+                <TodosUsuarios/>
                 :
                 ''
             }

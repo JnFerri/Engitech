@@ -50,18 +50,18 @@ function FormCalculoAproveitamento() {
             <FormCalculo onSubmit={HandleSubmit}>
                 <DivLinha>
                     <DivColuna>
-                        <Label tamanho = "pequeno">Medida A da Peça</Label>
-                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaA} value={MedidaA} required></InputForm>
+                        <Label tamanho = "pequeno">Medida A da Peça </Label>
+                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaA} value={MedidaA} required placeholder="mm"></InputForm>
                     </DivColuna>
                     <DivColuna>
                         <Label tamanho = "pequeno">Medida B da Peça</Label>
-                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaB} value={MedidaB} required></InputForm>
+                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandleMedidaB} value={MedidaB} required placeholder="mm"></InputForm>
                     </DivColuna>
                 </DivLinha>
                 <DivLinha>
                     <DivColuna>
-                        <Label tamanho = "pequeno">Peso da Peça</Label>
-                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandlePeso} value={Peso} required></InputForm>
+                        <Label tamanho = "pequeno">Peso da Peça (kg)</Label>
+                        <InputForm type="number" tamanho = "medio" width= '80%' onChange={HandlePeso} value={Peso} required placeholder="kg"></InputForm>
                     </DivColuna>
                     <DivColuna>
                         <Label tamanho = "pequeno">Material</Label>

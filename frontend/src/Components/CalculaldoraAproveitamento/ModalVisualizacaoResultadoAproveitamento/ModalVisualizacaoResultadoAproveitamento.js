@@ -66,8 +66,8 @@ function ModalVisualizacaoResultadoAproveitamento(){
             DadosChapaVisualizacao ? 
 
         <ModalVisualizacaoResultadoContainer>
-        <DivLinha>
-            <Button secundario tamanho='medio' width='20% ' margin='0.5rem 0.5rem' onClick={() => FechaModalVisualizacao()}>Fechar</Button>
+        <DivLinha width='100%' justifyContent='flex-start'>
+            <Button secundario tamanho='medio' width='15%' margin='0.5rem 0.5rem' onClick={() => FechaModalVisualizacao()}>Fechar</Button>
         </DivLinha>
         <SecoesVisualizacao>
         <Titulo2>Dados da Chapa</Titulo2>

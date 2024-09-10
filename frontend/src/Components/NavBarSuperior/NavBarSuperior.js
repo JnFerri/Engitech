@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Imagem from "../Imagem/Imagem.js";
 import logoEngitech from '../../Images/Engitech_logo.png'
 import MenuDropDownUsuario from "../MenuDopDownUsuario/MenuDropDownUsuario.js";
+import { useNavigate } from "react-router-dom";
+import { useMenuLateral } from "../../Context/MenuLateral.js";
 
 const NavBarContainer = styled.section`
 display:flex;
@@ -13,10 +15,12 @@ height:6%;
 min-height:6%;
 `
 
+
 function NavBarSuperior(){
+    const {HandleTipoMenu} = useMenuLateral()
     return(
         <NavBarContainer>
-            <Imagem src={logoEngitech} alt="logo engitech" width='4%' height='auto' margin='0.5rem 1rem' />
+            <Imagem src={logoEngitech} alt="logo engitech" width='4%' height='auto' margin='0.5rem 1rem' onClick={() => HandleTipoMenu('')} />
             <MenuDropDownUsuario/>
         </NavBarContainer>
     )

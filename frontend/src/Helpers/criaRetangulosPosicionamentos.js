@@ -7,12 +7,12 @@ function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBor
     const retangulosHorizontal = []
     const retangulosVertical = []
     const retangulosMaximo = []
-    const retangulosVerticalMaximo = []
+    
     
     let resultadoHorizontal = []
     let resultadoVertical = []
     let resultadoMaximoMisturado = []
-    let resultadoMaximoVerticalPrimeiro = []
+    
 
 
     // Criando retângulos na orientação horizontal
@@ -96,27 +96,6 @@ function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBor
            resultadoMaximoMisturado = pack.insert2(retangulosMaximo, MaxRectsBinPack.BottomLeftRule)
         
     }
- 
-   /* // Criando retângulos para o máximo quantidade_pecas_vertical primeiro
-    if (dadosChapa.quantidade_pecas_vertical_maximo > 0) {
-        for (let i = 0; i < dadosChapa.quantidade_pecas_vertical_maximo; i++) {
-            const retangle = {
-                width: MedidaA,
-                height: MedidaB,
-                id : i
-            }
-            retangulosVerticalMaximo.push(retangle)
-        }
-
-        const pack = new MaxRectsBinPack.MaxRectsBinPack(
-            dadosChapa.cha_comprimento - MedidaBordaSeguranca, 
-            dadosChapa.cha_altura - MedidaBordaSeguranca, 
-            true
-        )
-       
-        resultadoMaximoVerticalPrimeiro =  pack.insert2(retangulosVerticalMaximo, MaxRectsBinPack.BestShortSideFit)
-    
-    }*/
 
     // Retornando todos os resultados
     return {

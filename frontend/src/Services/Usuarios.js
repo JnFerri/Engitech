@@ -126,8 +126,59 @@ async function loginUsuario(email,senha){
     }
 }
 
+async function pegarTiposUsuarios(){
+    try{
+        const options = {
+            method: 'GET',
+            headers : {
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            }
+        }
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/tiposUsuarios`, options)
+        const data = await result.json()
+        return {data:data , status:result.status}
+    }catch(err){
+        console.error('Erro ao pegar tipos de usuarios' , err)
+        throw err
+    }
+}
 
+async function pegarTodosUsuariosPorEmailPesquisa(email){
+    try{
+        const options = {
+            method: 'GET',
+            headers : {
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            }
+    }
+    const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/email/${email}`,options)
+    const data = await result.json()
+    return {data:data , status:result.status}
+}catch(err){
+    console.error('Erro ao pegar usuarios por email' , err)
+    throw err
+}
+}
 
+async function InativarUsuario(id){
+    try{
+        const options = {
+            method: 'PATCH',
+            headers : {
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            }
+        }
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/inativar/${id}`,options)
+        const data = await result.json()
+        return {data:data , status:result.status}
+    }catch(err){
+        console.error('Erro ao inativar usuario' , err)
+        throw err
+    }
+}
 
     
-export  { PegaTodosOsUsuarios , PegaUsuarioPorId, criarUsuario, deletarUsuarioPorId ,alterarSenhaUsuario , loginUsuario }
+export  { PegaTodosOsUsuarios , PegaUsuarioPorId, criarUsuario, deletarUsuarioPorId ,alterarSenhaUsuario , loginUsuario, pegarTiposUsuarios , pegarTodosUsuariosPorEmailPesquisa , InativarUsuario }

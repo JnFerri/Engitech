@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { loginUsuario } from "../Services/Usuarios.js"
 
 const UsuarioContext = createContext()
@@ -10,6 +10,7 @@ export const UsuarioProvider = ({children}) => {
     const [error, setError] = useState('')
     const [IsAuth, setIsAuth] = useState(false)
     const [Usuario, setUsuario] = useState([])
+    const [TipoUsuario, setTipoUsuario] = useState(0)
 
     function handleEmail(e){
     setEmail(e.target.value)
@@ -18,6 +19,12 @@ export const UsuarioProvider = ({children}) => {
     function handleSenha(e){
     setSenha(e.target.value)
     }
+
+    useEffect(() => {
+        const Usuarios = localStorage.getItem('Usuario')
+        const Usuario = JSON.parse(Usuarios)
+        setTipoUsuario(Usuario.tpu_id)
+    }, [])
 
     async function handleSubmit(e , navigate){
         e.preventDefault()
@@ -46,7 +53,7 @@ export const UsuarioProvider = ({children}) => {
 
     
     return (
-        <UsuarioContext.Provider value={{ email , senha , error , handleSubmit , handleEmail , handleSenha , IsAuth , setIsAuth , handleLogout , Usuario}}>
+        <UsuarioContext.Provider value={{ email , senha , error , handleSubmit , handleEmail , handleSenha , IsAuth , setIsAuth , handleLogout , Usuario, TipoUsuario}}>
       {children}
     </UsuarioContext.Provider>
   );

@@ -97,8 +97,8 @@ function ModalChapa({cadastro, atualizacao}){
             : 
             window.alert('Componente modal deve conter um tipo de cadastro ou de atualização')} >
 
-            <DivLinha >
-                <DivColuna width='25%' margin='0 0.5rem'>
+            <DivLinha width='100%'>
+                <DivColuna width='30%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Código da Chapa</Label>
                     <InputForm type="number" tamanho='medio' width='85%' required onChange={HandleCodigoChapaFormModal} value={CodigoChapaFormModal}></InputForm>
                 </DivColuna>
@@ -114,15 +114,15 @@ function ModalChapa({cadastro, atualizacao}){
                     </SelectForm>
                 </DivColuna>
             </DivLinha>
-                <DivLinha>
+                <DivLinha width='100%' >
                 <DivColuna width='100%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Descrição</Label>
-                    <InputForm type="text" tamanho='medio' width='92%' required onChange={HandleDescricaoChapaFormModal} value={DescricaoChapaFormModal}></InputForm>
+                    <InputForm type="text" tamanho='medio' width='97%' required onChange={HandleDescricaoChapaFormModal} value={DescricaoChapaFormModal}></InputForm>
                 </DivColuna>
 
                 </DivLinha>
 
-            <DivLinha >
+            <DivLinha width='100%' >
                 <DivColuna width='33%' margin='0 0.5rem'>
                     <Label tamanho='pequeno'>Altura</Label>
                     <InputForm type="number" tamanho='medio' width='85%' step='0.01' required onChange={HandleAlturaChapaFormModal} value={AlturaChapaFormModal} placeholder="Altura em milimetros"></InputForm>

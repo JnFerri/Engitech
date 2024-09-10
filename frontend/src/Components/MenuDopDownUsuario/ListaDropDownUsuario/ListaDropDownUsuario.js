@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useUsuario } from "../../../Context/Usuario.js";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useMenuLateral } from "../../../Context/MenuLateral.js";
 
 
 const ListaContainer = styled.ul`
@@ -31,13 +33,25 @@ const ListaItem = styled.li`
 
 
 function ListaDropDownUsuario(){
-    const {handleLogout} = useUsuario()
+    const {handleLogout,TipoUsuario} = useUsuario()
+    const { HandleTipoMenu} = useMenuLateral()
     const navigate = useNavigate()
+    
+    useEffect(() => {
+        console.log(TipoUsuario)
+    }, [TipoUsuario])
 
     return(
         <ListaContainer>
-        <ListaItem>Alterar Senha</ListaItem>
+        
+        <ListaItem>Perfil</ListaItem>
+        { TipoUsuario === 1 ?
+            <ListaItem onClick={() => HandleTipoMenu('UsuariosAdmin')}>Usuarios</ListaItem>
+            :null
+        }
+            
         <ListaItem onClick={() => handleLogout(navigate)}>Sair</ListaItem>       
+        
         </ListaContainer>
     )
 }

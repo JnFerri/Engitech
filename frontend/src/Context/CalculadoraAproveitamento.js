@@ -4,7 +4,7 @@ import { pegarChapasParaCalculo } from "../Services/Chapas.js";
 import calculaMaximoDePecasChapa from "../Helpers/calculaMaximoDePecasChapa.js";
 import calculaInformacoesResultado from "../Helpers/calculaInformacoesResultados.js";
 import criaRetangulosPosicionamentos from "../Helpers/criaRetangulosPosicionamentos.js";
-import ordenarChapasPorMenorPerda from "../Helpers/ordenarChapasMenorPerda.js";
+
 
 
 const CalculadoraAproveitamentoContext = createContext()
@@ -12,9 +12,9 @@ const CalculadoraAproveitamentoContext = createContext()
 
 export const CalculadoraAproveitamentoProvider = ({children}) => {
     const MedidaBordaSegurancaChapa = 10
-    const [MedidaA, setMedidaA] = useState(0)
-    const [MedidaB, setMedidaB] = useState(0)
-    const [Peso, setPeso] = useState(0)
+    const [MedidaA, setMedidaA] = useState('')
+    const [MedidaB, setMedidaB] = useState('')
+    const [Peso, setPeso] = useState('')
     const [MaterialSelecionado, setMaterialSelecionado] = useState('')
     const [EspessurasOptions, setEspessurasOptions] = useState([])
     const [MaterialOptions, setMaterialOptions] =useState([])
@@ -101,9 +101,9 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
 
         setMedidaAPecaEmResultado(MedidaA)
         setMedidaBPecaEmResultado(MedidaB)
-        setMedidaA(0)
-        setMedidaB(0)
-        setPeso(0)
+        setMedidaA('')
+        setMedidaB('')
+        setPeso('')
         setMaterialSelecionado('')
         setEspessuraSelecionada(0)
     }
