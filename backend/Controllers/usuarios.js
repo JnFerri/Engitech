@@ -41,9 +41,9 @@ async function usuarioPorId(req,res) {
 async function criarUsuario(req,res){
     try{
         if(await verificaToken(req)){
-            const sql = 'insert into usuarios (usu_nome , usu_email , usu_senha) values (?,?,?)'
+            const sql = 'insert into usuarios (usu_nome , usu_email , usu_senha , tpu_id) values (?,?,?, ?)'
             const senhaHash = await hashPassword(req.body.usu_senha)
-            const filtro = [req.body.usu_nome, req.body.usu_email, senhaHash]
+            const filtro = [req.body.usu_nome, req.body.usu_email, senhaHash , req.body.tpu_id]
             await DBConnection.promise().query(sql,filtro)
             res.status(201).json({ message: 'Usuário criado com sucesso.' })
         }else {

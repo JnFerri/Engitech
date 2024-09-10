@@ -33,25 +33,13 @@ const ListaItem = styled.li`
 
 
 function ListaDropDownUsuario(){
-    const {handleLogout,TipoUsuario} = useUsuario()
-    const { HandleTipoMenu} = useMenuLateral()
+    const {handleLogout} = useUsuario()
     const navigate = useNavigate()
     
-    useEffect(() => {
-        console.log(TipoUsuario)
-    }, [TipoUsuario])
 
     return(
         <ListaContainer>
-        
-        <ListaItem>Perfil</ListaItem>
-        { TipoUsuario === 1 ?
-            <ListaItem onClick={() => HandleTipoMenu('UsuariosAdmin')}>Usuarios</ListaItem>
-            :null
-        }
-            
         <ListaItem onClick={() => handleLogout(navigate)}>Sair</ListaItem>       
-        
         </ListaContainer>
     )
 }

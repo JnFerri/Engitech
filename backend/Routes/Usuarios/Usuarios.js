@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {todosUsuarios,usuarioPorId,criarUsuario,deletarUsuarioPorId,alterarSenhaUsuario,loginUsuario, pegarTodosUsuariosPorEmailPesquisa,InativarUsuario } from "../../Controllers/Usuarios.js";
+import {todosUsuarios,usuarioPorId,criarUsuario,deletarUsuarioPorId,alterarSenhaUsuario,loginUsuario, pegarTodosUsuariosPorEmailPesquisa,InativarUsuario ,pegarTiposUsuarios} from "../../Controllers/Usuarios.js";
 
 
 const router = Router()
@@ -16,7 +16,7 @@ router.patch('/update/senha', (req,res) => {alterarSenhaUsuario(req,res)})
 
 router.post('/login', (req,res) => {loginUsuario(req,res)})
 
-router.get('/tiposUsuarios', (req,res) => {pegarTiposUsuarios(req,res)})
+router.get('/get/tiposUsuarios', (req,res) => {pegarTiposUsuarios(req,res)})
 
 router.get('/email/:email', (req,res) => {pegarTodosUsuariosPorEmailPesquisa(req,res)})
 

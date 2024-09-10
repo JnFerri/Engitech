@@ -36,7 +36,7 @@ async function PegaUsuarioPorId(id){
     }
 }
 
-async function criarUsuario(nome,email,senha){
+async function criarUsuario(nome,email,senha, tpu_id){
     try{
         const options = {
             method:'POST',
@@ -48,7 +48,8 @@ async function criarUsuario(nome,email,senha){
             body : JSON.stringify({
                 usu_nome: nome,
                 usu_email: email,
-                usu_senha: senha
+                usu_senha: senha,
+                tpu_id : tpu_id
             })
     }
     const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/create`,options)
@@ -135,7 +136,8 @@ async function pegarTiposUsuarios(){
                 "authorization": `Bearer ${token}`
             }
         }
-        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/tiposUsuarios`, options)
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/get/tiposUsuarios`, options)
+        console.log(result)
         const data = await result.json()
         return {data:data , status:result.status}
     }catch(err){

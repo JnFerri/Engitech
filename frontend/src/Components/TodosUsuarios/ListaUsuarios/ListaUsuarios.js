@@ -4,6 +4,8 @@ import tranformarDataString from "../../../Helpers/tranformarDataString.js";
 import Label from "../../Label/Label.js";
 import InputForm from "../../InputForm/InputForm.js";
 import { useTodosUsuarios } from "../../../Context/TodosUsuarios.js";
+import { useEffect } from "react";
+import { PegaTodosOsUsuarios } from "../../../Services/Usuarios.js";
 
 const ListaChapasContainer = styled.section`
 display:flex;
@@ -63,7 +65,16 @@ const TdTabela = styled.td`
 
 
 function ListaUsuarios() {
-    const {DadosTodosUsuarios, PesquisaEmail , AbrirModalAlteracaoSenha , HandleInativarUsuario} = useTodosUsuarios()
+    const {DadosTodosUsuarios, PesquisaEmail , AbrirModalAlteracaoSenha , HandleInativarUsuario, setDadosTodosUsuarios} = useTodosUsuarios()
+
+    useEffect( () => {
+      async function pegarUsuarios() {
+      const resultado = await PegaTodosOsUsuarios()
+      setDadosTodosUsuarios(resultado.data) 
+    }
+    pegarUsuarios()
+  }
+  ,[setDadosTodosUsuarios])
     
     const colunas = {
         usu_id: { nome: "Id", largura: "5%" },

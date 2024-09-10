@@ -6,6 +6,7 @@ import { useUsuario } from "../../Context/Usuario.js";
 import ListaMenuLateralAdmin from "./ListaMenuLateralAdmin/ListaMenuLateralAdmin.js";
 import ListaMenuLateralMembro from "./ListaMenuLateralMembro/ListaMenuLateralMembro.js";
 import ListaMenuLateralUsuariosCadastros from "./ListaMenuLateralUsuariosCadastros/ListaMenuLateralUsuariosCadastros.js";
+import { useEffect } from "react";
 
 
 const MenuLateralContainer = styled.section`
@@ -29,7 +30,14 @@ width:100%;
 
 function MenuLateral(){
     const {TipoOpcoesMenuLateral , HandleTipoMenu} = useMenuLateral()
-    const {TipoUsuario} = useUsuario()    
+    const {TipoUsuario, setTipoUsuario} = useUsuario()  
+
+
+    useEffect(() => {
+        const Usuarios = localStorage.getItem('Usuario')
+        const Usuario = JSON.parse(Usuarios)
+        setTipoUsuario(Usuario.tpu_id)
+    }, [setTipoUsuario])
     return(
         <MenuLateralContainer>
             <MenuBox>

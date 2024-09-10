@@ -3,6 +3,7 @@ import CalculadoraAproveitamento from "../CalculaldoraAproveitamento/Calculadora
 import { useMenuLateral } from "../../Context/MenuLateral.js";
 import ChapasCadastradas from "../ChapasCadastradas/ChapasCadastradas.js";
 import TodosUsuarios from "../TodosUsuarios/TodosUsuarios.js";
+import CadastroUsuario from "../CadastroUsuario/CadastroUsuario.js";
 
 
 const PainelContainer = styled.section`
@@ -33,7 +34,10 @@ function PainelUtilizacao(){
                 OpcaoSelecionadaMenuLateral === 'TodosUsuarios' ?
                 <TodosUsuarios/>
                 :
-                ''
+                OpcaoSelecionadaMenuLateral === 'CadastrarUsuario' ?
+                <CadastroUsuario/>
+                :
+                null
             }
            
         </PainelContainer>

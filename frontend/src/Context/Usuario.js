@@ -53,7 +53,7 @@ export const UsuarioProvider = ({children}) => {
 
     
     return (
-        <UsuarioContext.Provider value={{ email , senha , error , handleSubmit , handleEmail , handleSenha , IsAuth , setIsAuth , handleLogout , Usuario, TipoUsuario}}>
+        <UsuarioContext.Provider value={{ email , senha , error , handleSubmit , handleEmail , handleSenha , IsAuth , setIsAuth , handleLogout , Usuario, TipoUsuario , setTipoUsuario}}>
       {children}
     </UsuarioContext.Provider>
   );
