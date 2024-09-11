@@ -25,7 +25,7 @@ const borderRadiusSize = {
 }
 
 const Button = styled.button`
-    background-color: ${props => props.primario ? '#32578F' : props.secundario ? '#f58634' : props.deletar ? '#d95543': '#313233'};
+    background-color: ${props => props.primario ? '#32578F' : props.secundario ? '#f58634' : props.deletar ? '#d95543': props.ativar ? '#497560' : '#313233'};
     color: ${props => props.primario ? 'white' : props.secundario ? 'white' : 'white' };
     border: ${props => borderSize[props.tamanho] || borderSize.medio};
     border-radius: ${props => borderRadiusSize[props.tamanho] || borderRadiusSize.medio};

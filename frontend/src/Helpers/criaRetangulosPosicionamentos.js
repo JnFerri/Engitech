@@ -1,7 +1,15 @@
 import MaxRectsBinPack from 'rects-bin-pack'
 
-function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBordaSeguranca){
+function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , maquina ){
     
+     function VerificaBordaSeguranca(){
+        if(dadosChapa.cha_comprimento > 3000 || dadosChapa.cha_altura > 1240){
+            return 0
+        }else {
+            return 10
+        }
+    }
+    const MedidaBordaSeguranca = VerificaBordaSeguranca()
     
     
     const retangulosHorizontal = []
@@ -91,7 +99,7 @@ function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , MedidaBor
             false
         )
 
-            console.log(retangulosMaximo.map(dado => dado))
+        
         
            resultadoMaximoMisturado = pack.insert2(retangulosMaximo, MaxRectsBinPack.BottomLeftRule)
         

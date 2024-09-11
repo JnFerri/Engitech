@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useUsuario } from "../../../Context/Usuario.js";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useMenuLateral } from "../../../Context/MenuLateral.js";
+
 
 
 const ListaContainer = styled.ul`

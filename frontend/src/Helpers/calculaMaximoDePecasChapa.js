@@ -1,5 +1,14 @@
-async function calculaMaximoDePecasChapa(DadosChapa, MedidaA, MedidaB, MedidaBordaSeguranca) {
+async function calculaMaximoDePecasChapa(DadosChapa, MedidaA, MedidaB , maquina) {
 
+   async function VerificaBordaSeguranca(){
+        if(DadosChapa.cha_comprimento > 3000 || DadosChapa.cha_altura > 1240  ){
+            return 0
+        }else {
+            return 10
+        }
+    }
+    const MedidaBordaSeguranca = await VerificaBordaSeguranca()
+    console.log(DadosChapa.cha_codigo , MedidaBordaSeguranca)
     const larguraUtil = DadosChapa.cha_comprimento - MedidaBordaSeguranca;
     const alturaUtil = DadosChapa.cha_altura - MedidaBordaSeguranca;
 
@@ -48,11 +57,11 @@ async function calculaMaximoDePecasChapa(DadosChapa, MedidaA, MedidaB, MedidaBor
 
     if (maxFitHorizontalFirst > maxFitVerticalFirst) {
         maxFitMisturado = maxFitHorizontalFirst;
-        melhorPosicao = 'Iniciado com Vertical';
+        melhorPosicao = 'Iniciado com Horizontal';
         melhorDistribuicao = horizontalFirstPosition;
     } else {
         maxFitMisturado = maxFitVerticalFirst;
-        melhorPosicao = 'Iniciado com Horizontal';
+        melhorPosicao = 'Iniciado com Vertical';
         melhorDistribuicao = verticalFirstPosition;
     }
 

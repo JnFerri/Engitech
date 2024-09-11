@@ -55,6 +55,12 @@ function PainelResultadoAproveitamento(){
                                 <Span>{dado.cha_altura}mm x {dado.cha_comprimento}mm</Span>
                             </DivColuna>
                         </DivLinha >
+                        {
+                            dado.cha_comprimento > 3000 || dado.cha_altura > 1240 ?
+                            <Span color='red'>Apenas Puncionadeira</Span>
+                            : 
+                            <br></br>
+                        }
                         <DivLinha margin='0.5rem 0'>
                         <DivColuna width='95%'>
                                 <Label tamanho = "pequeno">Menor Perda na Chapa</Label>

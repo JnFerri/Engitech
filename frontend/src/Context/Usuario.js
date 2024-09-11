@@ -22,8 +22,10 @@ export const UsuarioProvider = ({children}) => {
 
     useEffect(() => {
         const Usuarios = localStorage.getItem('Usuario')
-        const Usuario = JSON.parse(Usuarios)
-        setTipoUsuario(Usuario.tpu_id)
+        if(Usuarios){
+            const Usuario = JSON.parse(Usuarios)
+            setTipoUsuario(Usuario.tpu_id)
+        }
     }, [])
 
     async function handleSubmit(e , navigate){

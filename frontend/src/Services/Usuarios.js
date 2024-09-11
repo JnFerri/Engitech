@@ -164,7 +164,7 @@ async function pegarTodosUsuariosPorEmailPesquisa(email){
 }
 }
 
-async function InativarUsuario(id){
+async function inativarUsuario(id){
     try{
         const options = {
             method: 'PATCH',
@@ -182,5 +182,25 @@ async function InativarUsuario(id){
     }
 }
 
+async function ativarUsuario(id){
+    try{
+        const options = {
+            method: 'PATCH',
+            headers : {
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            }
+        }
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/ativar/${id}`,options)
+        const data = await result.json()
+        return {data:data , status:result.status}
+    }catch(err){
+        console.error('Erro ao inativar usuario' , err)
+        throw err
+    }
+
+}
+
+
     
-export  { PegaTodosOsUsuarios , PegaUsuarioPorId, criarUsuario, deletarUsuarioPorId ,alterarSenhaUsuario , loginUsuario, pegarTiposUsuarios , pegarTodosUsuariosPorEmailPesquisa , InativarUsuario }
+export  { PegaTodosOsUsuarios , PegaUsuarioPorId, criarUsuario, deletarUsuarioPorId ,alterarSenhaUsuario , loginUsuario, pegarTiposUsuarios , pegarTodosUsuariosPorEmailPesquisa , inativarUsuario , ativarUsuario}

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { alterarSenhaUsuario, InativarUsuario, pegarTodosUsuariosPorEmailPesquisa, PegaTodosOsUsuarios } from "../Services/Usuarios.js"
+import { alterarSenhaUsuario, inativarUsuario, pegarTodosUsuariosPorEmailPesquisa, PegaTodosOsUsuarios ,ativarUsuario } from "../Services/Usuarios.js"
 
 
 const TodosUsuariosContext = createContext()
@@ -86,8 +86,7 @@ export const TodosUsuariosProvider = ({children}) => {
     async function HandleInativarUsuario(dadosUsuario){
       const confirmacao = window.confirm(`Tem certeza que quer inativar o usuario ${dadosUsuario.usu_nome} ?`)
       if(confirmacao){
-        const resultado = await InativarUsuario(dadosUsuario.usu_id)
-        console.log(resultado)
+        const resultado = await inativarUsuario(dadosUsuario.usu_id)
         if(resultado.status === 200){
           const resultado = await PegaTodosOsUsuarios()
           setDadosTodosUsuarios(resultado.data)
@@ -95,9 +94,18 @@ export const TodosUsuariosProvider = ({children}) => {
         }
       }
     }
+    
+    async function HandleAtivarUsuario(dadosUsuario){
+      const resultado = await ativarUsuario(dadosUsuario.usu_id)
+        if(resultado.status === 200){
+          const resultado = await PegaTodosOsUsuarios()
+          setDadosTodosUsuarios(resultado.data)
+          window.alert(`Usuario ${dadosUsuario.usu_nome} ativado com sucesso.`)
+        }
+    }
 
       return(
-        <TodosUsuariosContext.Provider value={{DadosTodosUsuarios, PesquisaEmail , ModalAlteracaoSenhaEstaAtivo , AbrirModalAlteracaoSenha , FecharModalAlteracaoSenha , HandleNovaSenhaFormModal , HandleConfirmaNovaSenhaFormModal , NovaSenhaFormModal , ConfirmaNovaSenhaFormModal , DadosUsuarioModalAlteracaoSenha , AlterarSenhaUsuario , PaginaSucessoAlteracaoSenhaEstaAtiva , HandleInativarUsuario , setDadosTodosUsuarios}}>
+        <TodosUsuariosContext.Provider value={{DadosTodosUsuarios, PesquisaEmail , ModalAlteracaoSenhaEstaAtivo , AbrirModalAlteracaoSenha , FecharModalAlteracaoSenha , HandleNovaSenhaFormModal , HandleConfirmaNovaSenhaFormModal , NovaSenhaFormModal , ConfirmaNovaSenhaFormModal , DadosUsuarioModalAlteracaoSenha , AlterarSenhaUsuario , PaginaSucessoAlteracaoSenhaEstaAtiva , HandleInativarUsuario , setDadosTodosUsuarios , HandleAtivarUsuario}}>
             {children}
         </TodosUsuariosContext.Provider>
       )

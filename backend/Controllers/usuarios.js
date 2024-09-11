@@ -139,7 +139,7 @@ async function pegarTodosUsuariosPorEmailPesquisa(req,res){
     }
 }
 
-async function InativarUsuario(req,res){
+async function inativarUsuario(req,res){
     try{
         if(await verificaToken(req)){
             const sql = 'update usuarios set usu_situacao = "Inativo" where usu_id = ?'
@@ -153,4 +153,18 @@ async function InativarUsuario(req,res){
     }
 }
 
-export {todosUsuarios, usuarioPorId, criarUsuario , deletarUsuarioPorId, alterarSenhaUsuario, loginUsuario ,pegarTiposUsuarios , pegarTodosUsuariosPorEmailPesquisa , InativarUsuario }
+async function ativarUsuario(req,res){
+    try{
+        if(await verificaToken(req)){
+            const sql = 'update usuarios set usu_situacao = "Ativo" where usu_id = ?'
+            const [rows] = await DBConnection.promise().query(sql, [req.params.id])
+            res.status(200).json({ message: 'Usuário inativado com sucesso.' })
+        }else {
+            res.status(401).json({ message: 'Token inválido.' })
+        }
+    }catch(err){
+        res.status(500).json({ message: `Erro interno do servidor ao ativar usuario. ${err}` })
+    }
+}
+
+export {todosUsuarios, usuarioPorId, criarUsuario , deletarUsuarioPorId, alterarSenhaUsuario, loginUsuario ,pegarTiposUsuarios , pegarTodosUsuariosPorEmailPesquisa , inativarUsuario , ativarUsuario }

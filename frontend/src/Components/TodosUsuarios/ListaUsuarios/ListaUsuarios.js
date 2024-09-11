@@ -65,7 +65,7 @@ const TdTabela = styled.td`
 
 
 function ListaUsuarios() {
-    const {DadosTodosUsuarios, PesquisaEmail , AbrirModalAlteracaoSenha , HandleInativarUsuario, setDadosTodosUsuarios} = useTodosUsuarios()
+    const {DadosTodosUsuarios, PesquisaEmail , AbrirModalAlteracaoSenha , HandleInativarUsuario, setDadosTodosUsuarios , HandleAtivarUsuario} = useTodosUsuarios()
 
     useEffect( () => {
       async function pegarUsuarios() {
@@ -118,7 +118,12 @@ function ListaUsuarios() {
 
                 </TdTabela>
                 <TdTabela>
-                <Button deletar width='90%' tamanho='pequeno' onClick={ () => HandleInativarUsuario(item)}>Inativar</Button>
+                  {
+                    item.usu_situacao === 'Ativo' ? 
+                    <Button deletar width='90%' tamanho='pequeno' onClick={ () => HandleInativarUsuario(item)}>Inativar</Button>
+                    :
+                    <Button ativar  width='90%' tamanho='pequeno' onClick={ () => HandleAtivarUsuario(item)}>Ativar</Button>
+                  }
 
                 </TdTabela>
               </TrTabela>

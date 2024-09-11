@@ -11,7 +11,6 @@ const CalculadoraAproveitamentoContext = createContext()
 
 
 export const CalculadoraAproveitamentoProvider = ({children}) => {
-    const MedidaBordaSegurancaChapa = 10
     const [MedidaA, setMedidaA] = useState('')
     const [MedidaB, setMedidaB] = useState('')
     const [Peso, setPeso] = useState('')
@@ -84,8 +83,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
             const quantidadePecas = await calculaMaximoDePecasChapa(
                 resultadoDados[i],
                 MedidaA,
-                MedidaB,
-                MedidaBordaSegurancaChapa
+                MedidaB
             );
             
             // Atualiza o estado de forma funcional, garantindo o valor correto de cada iteração
@@ -111,7 +109,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     async function AbreVisualizacaoCriaRetangulosPosicionamentos(dadoChapa){
         setDadosChapaVisualizacao(dadoChapa)
 
-        const resultadosPosicionamentos = await criaRetangulosPosicionamentos(dadoChapa , MedidaAPecaEmResultado , MedidaBPecaEmResultado , MedidaBordaSegurancaChapa)
+        const resultadosPosicionamentos = await criaRetangulosPosicionamentos(dadoChapa , MedidaAPecaEmResultado , MedidaBPecaEmResultado )
         
         
         setAlturaChapaVisualizacao(dadoChapa.cha_altura)
