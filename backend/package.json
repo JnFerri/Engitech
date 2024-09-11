@@ -12,13 +12,15 @@
     "nodemon": "^3.1.4",
     "sinon": "^18.0.0"
   },
-  "name": "engitech-backend",
-  "version": "0.0.0",
-  "description": "Backend da aplicação engitech",
+  "name": "engtech-backend",
+  "version": "1.0.0",
+  "description": "Backend da aplicação engtech",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon server.js",
+    "start" : "node server.js"
   },
   "author": "Jean Ferri",
   "license": "ISC"
