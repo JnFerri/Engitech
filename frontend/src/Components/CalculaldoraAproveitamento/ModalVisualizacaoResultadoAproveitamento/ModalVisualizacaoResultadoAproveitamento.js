@@ -15,7 +15,7 @@ import VisualizacaoChapas from "../../VisualizacaoChapas/VisualizacaoChapas.js";
 const ModalVisualizacaoResultadoContainer = styled.section`
 position: absolut;
 width:80%;
-height:80vh;
+height:90vh;
 margin:10vh 10%;
 border:0.5px black solid;
 border-radius:10px;
@@ -37,6 +37,11 @@ const SecoesVisualizacao = styled.div`
     flex-direction:column;
     margin:1rem 0;
     border-bottom:1px black solid;
+    position:sticky;
+    top:0;
+    background-color:white;
+    z-index:1001;
+}
 `
 
 const SecaoVisualizacaoResultadosChapas = styled.div`
@@ -54,7 +59,7 @@ const SecaoVisualizacaoResultadosChapas = styled.div`
 
 
 function ModalVisualizacaoResultadoAproveitamento(){
-    const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoMisturado, FechaModalVisualizacao} = useCalculadoraAproveitamento()
+    const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoMisturado, FechaModalVisualizacao, DadosChapaFixadoModal, HandleScrollModal} = useCalculadoraAproveitamento()
 
     useEffect(() => {
         console.log(RetangulosPosicionamentoMaximoMisturado)
@@ -65,25 +70,28 @@ function ModalVisualizacaoResultadoAproveitamento(){
         {
             DadosChapaVisualizacao ? 
 
-        <ModalVisualizacaoResultadoContainer>
+        <ModalVisualizacaoResultadoContainer onScrollCapture={HandleScrollModal}>
+        <SecoesVisualizacao DadosChapaFixadoModal={DadosChapaFixadoModal}>
         <DivLinha width='100%' justifyContent='flex-start'>
-            <Button secundario tamanho='medio' width='15%' margin='0.5rem 0.5rem' onClick={() => FechaModalVisualizacao()}>Fechar</Button>
+            <Button secundario tamanho='medio' width='15%' onClick={() => FechaModalVisualizacao()}>Fechar</Button>
         </DivLinha>
-        <SecoesVisualizacao>
         <Titulo2>Dados da Chapa</Titulo2>
         <DivLinha>
-            <DivColuna width='10%'>
+            <DivColuna width='20%'>
                 <Label tamanho = 'Medio' >Código Chapa</Label>
                 <Span width='100%' textAlign='left'>{DadosChapaVisualizacao.cha_codigo}</Span>
             </DivColuna>
-            <DivColuna width = '60%'>
+            <DivColuna width = '50%'>
                 <Label tamanho = 'Medio' >Descrição Chapa</Label>
                 <Span width='100%' textAlign='left'>{DadosChapaVisualizacao.cha_nome}</Span>
             </DivColuna>
-       
             <DivColuna width = '30%'>
                 <Label tamanho = 'Medio' >Tamanho da Chapa</Label>
-                <Span width='100%' textAlign='left'> {DadosChapaVisualizacao.cha_espessura} X {DadosChapaVisualizacao.cha_altura} X {DadosChapaVisualizacao.cha_comprimento} </Span>
+                <Span width='100%' textAlign='left'> {DadosChapaVisualizacao.cha_espessura} X {DadosChapaVisualizacao.cha_altura} X {DadosChapaVisualizacao.cha_comprimento} mm</Span>
+            </DivColuna>
+            <DivColuna width = '30%'>
+                <Label tamanho = 'Medio' >Tamanho da peça</Label>
+                <Span width='100%' textAlign='left'> {`${DadosChapaVisualizacao.peca_medida_A} x ${DadosChapaVisualizacao.peca_medida_B} mm `} </Span>
             </DivColuna>
         </DivLinha>
         </SecoesVisualizacao>

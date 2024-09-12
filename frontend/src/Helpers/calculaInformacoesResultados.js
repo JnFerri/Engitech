@@ -29,7 +29,9 @@ async function calculaInformacoesResultado(DadosChapa, DadosQuantidades, PesoPec
         melhorPosicaoMisturado:DadosQuantidades.melhorPosicao,
         distribuicaoMisturado: DadosQuantidades.distribuicao,
         perda_misturado : perdaMisturadoMaximo.toFixed(2),
-        valor_und : valorUnd
+        valor_und : valorUnd,
+        peca_medida_A : DadosQuantidades.pecaMedidaA,
+        peca_medida_B : DadosQuantidades.pecaMedidaB
 
     }
 

@@ -71,7 +71,9 @@ async function calculaMaximoDePecasChapa(DadosChapa, MedidaA, MedidaB , maquina)
         vertical: verticalFit,
         maxMisturado: maxFitMisturado,
         melhorPosicao: melhorPosicao,
-        distribuicao: melhorDistribuicao
+        distribuicao: melhorDistribuicao,
+        pecaMedidaA: MedidaA,
+        pecaMedidaB: MedidaB,
     };
 }
 

@@ -65,14 +65,14 @@ function ListaChapas() {
     
     const colunas = {
         cha_codigo: { nome: "Código", largura: "5%" },
-        cha_nome: { nome: "Nome", largura: "45%" },
-        cha_altura: { nome: "Altura", largura: "10%" },
-        cha_comprimento: { nome: "Comprimento ", largura: "10%" },
+        cha_nome: { nome: "Nome", largura: "35%" },
+        cha_altura: { nome: "Altura", largura: "5%" },
+        cha_comprimento: { nome: "Comprimento ", largura: "5%" },
         cha_espessura: { nome: "Espessura", largura: "5%" },
         cha_data_hora_criacao: { nome: "Data Criação", largura: "10%" },
         cha_data_hora_atualizacao: { nome: "Data Atualização", largura: "10%" },
-        mat_nome: { nome: "Material", largura: "15%" },
-        mat_fator_densidade: { nome: "Densidade", largura: "10%" },
+        mat_nome: { nome: "Material", largura: "10%" },
+        mat_fator_densidade: { nome: "Densidade", largura: "5%" },
       };
 
 
@@ -89,6 +89,9 @@ function ListaChapas() {
                 {colunas[key].nome}
               </ThTabela>
             ))}
+              <ThTabela>
+                Peso da Chapa
+              </ThTabela>
           </TrTabela>
         </TheadTabela>
         <TbodyTabela>
@@ -101,6 +104,10 @@ function ListaChapas() {
                     {key === 'cha_data_hora_criacao' || key === 'cha_data_hora_atualizacao' ? tranformarDataString(item[key]) : item[key]}
                   </TdTabela>
                 ))}
+                <TdTabela key={colunas.length + 1} width='20%' >
+                    {Number(item['cha_espessura'] * item['cha_altura'] * item['cha_comprimento'] * item['mat_fator_densidade'] / 1000).toFixed(3)  } kg
+                </TdTabela>
+
                 <TdTabela>
                 <Button primario width='110%' tamanho='pequeno'  onClick={ () => AbrirModalChapa('atualizacao' , item)}>Alterar</Button>
 

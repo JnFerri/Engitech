@@ -42,6 +42,7 @@ function PainelResultadoAproveitamento(){
             {
                 DadosResultado.length > 0 &&
                 ordenarChapasPorMenorPerda(DadosResultado).map((dado,index) => (
+                    Math.min(parseFloat(dado.perda_horizontal) , parseFloat(dado.perda_vertical), parseFloat(dado.perda_misturado) ) > 0 ?
                     <ItemResultadoContainer key={index} index={index} onClick={async () => await AbreVisualizacaoCriaRetangulosPosicionamentos(dado)}>
                         <DivLinha style={{width:'100%' , backgroundColor :'#314159'}}>
                             <DivColuna width='95%'>
@@ -68,6 +69,8 @@ function PainelResultadoAproveitamento(){
                             </DivColuna>
                         </DivLinha>
                     </ItemResultadoContainer>
+                    :
+                    <Span>Verifique os valores colocados no formulario, pois perda possui valor negativo...</Span>
                 )
                     
             )

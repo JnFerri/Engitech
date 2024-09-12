@@ -29,21 +29,33 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     const [ModalVisualizacaoEstaVisivel , setModalVisualizacaoEstaVisivel] = useState(false)
     const [MedidaAPecaEmResultado, setMedidaAPecaEmResultado] = useState(0)
     const [MedidaBPecaEmResultado, setMedidaBPecaEmResultado] = useState(0)
-
+    const [DadosChapaFixadoModal, setDadosChapaFixaModal] = useState(false)
 
     function HandleMedidaA(e){
         let medida = e.target.value
-        setMedidaA(parseFloat(medida.replace(',', '.')))
+        if(medida > 0 || medida === ''){
+            setMedidaA(parseFloat(medida.replace(',', '.')))
+        }else{
+            setMedidaA(0)
+        }
     }
 
     function HandleMedidaB(e){
         let medida = e.target.value
-        setMedidaB( parseFloat(medida.replace(',', '.')))
+        if(medida > 0 || medida === ''){
+            setMedidaB( parseFloat(medida.replace(',', '.')))
+        }else{
+            setMedidaB(0)
+        }
     }
 
     function HandlePeso(e){
         let peso = e.target.value
-        setPeso(parseFloat(peso.replace(',', '.')))
+        if(peso > 0 || peso === ''){
+            setPeso(parseFloat(peso.replace(',', '.')))
+        }else{
+            setPeso(0)
+        }
     }
 
    async function HandleMaterialSelecionado(e){
@@ -57,6 +69,10 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
 
     function HandleEspessuraSelecionada(e){
         setEspessuraSelecionada(e.target.value)
+    }
+
+    function HandleScrollModal(){
+        setDadosChapaFixaModal(true)
     }
 
    
@@ -77,6 +93,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
 
         const resultado = await pegarChapasParaCalculo(MaterialSelecionado,EspessuraSelecionada)
         const resultadoDados = resultado.data
+
         for(let i = 0; i < resultadoDados.length;i++){
 
 
@@ -91,6 +108,8 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
             
             
             const DadosTotaisChapas = await calculaInformacoesResultado(resultadoDados[i], quantidadePecas, Peso)
+
+
 
             setDadosResultado((ValorAnnteriorDadosResultado) => [...ValorAnnteriorDadosResultado , DadosTotaisChapas])
             
@@ -136,7 +155,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     
 
     return (
-    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoMisturado}}>
+    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoMisturado, DadosChapaFixadoModal}}>
       {children}
     </CalculadoraAproveitamentoContext.Provider>
   );

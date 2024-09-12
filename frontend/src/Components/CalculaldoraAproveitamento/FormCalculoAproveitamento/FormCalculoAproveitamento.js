@@ -66,7 +66,7 @@ function FormCalculoAproveitamento() {
                     <DivColuna>
                         <Label tamanho = "pequeno">Material</Label>
                         <SelectForm tamanho = "medio" width= '86%' onChange={HandleMaterialSelecionado} value={MaterialSelecionado} required>
-                            <option>Selecione o Material</option>
+                            <option value=''>Selecione o Material</option>
                             {
                                 MaterialOptions  ?
                                 MaterialOptions.map((dado,index) => (
@@ -83,7 +83,7 @@ function FormCalculoAproveitamento() {
                 <DivColuna>
                         <Label tamanho = "pequeno">Espessura</Label>
                         <SelectForm tamanho = "medio" width= '86%' onChange={HandleEspessuraSelecionada} value={EspessuraSelecionada} required>
-                            <option>Selecione a Espessura</option>
+                            <option value=''>Selecione a Espessura</option>
                             {
                                 EspessurasOptions ?
                                 EspessurasOptions.map((dado,index) => (
