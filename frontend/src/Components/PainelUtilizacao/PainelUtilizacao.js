@@ -4,6 +4,7 @@ import { useMenuLateral } from "../../Context/MenuLateral.js";
 import ChapasCadastradas from "../ChapasCadastradas/ChapasCadastradas.js";
 import TodosUsuarios from "../TodosUsuarios/TodosUsuarios.js";
 import CadastroUsuario from "../CadastroUsuario/CadastroUsuario.js";
+import CalculadoraPesoChapa from "../CalculadoraPesoChapa/CalculadoraPesoChapa.js";
 
 
 const PainelContainer = styled.section`
@@ -28,8 +29,8 @@ function PainelUtilizacao(){
                 OpcaoSelecionadaMenuLateral === 'ChapasCadastradas' ?
                 <ChapasCadastradas/>
                 :
-                OpcaoSelecionadaMenuLateral === 'RetalhosEstoque' ?
-                ''
+                OpcaoSelecionadaMenuLateral === 'CalculadoraPesoChapas' ?
+                <CalculadoraPesoChapa/>
                 :
                 OpcaoSelecionadaMenuLateral === 'TodosUsuarios' ?
                 <TodosUsuarios/>

@@ -1,4 +1,5 @@
 const token = process.env.REACT_APP_TOKEN_API
+
 async function pegarTodosMateriais(){
     try{
         const options = {
@@ -16,4 +17,23 @@ async function pegarTodosMateriais(){
         throw err
     }}
 
-    export {pegarTodosMateriais}
+async function pegarMaterialPorId(id){
+    try{
+        const options = {
+            method:'GET',
+            headers:{
+                'Content-Type': 'application/json',
+                "authorization": `Bearer ${token}`
+            }
+        }
+        const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/materiais/${id}`, options)
+        const data = await result.json()
+        return {data:data , status:result.status}
+
+    }catch(err){
+        console.error('Erro ao pegar material por id')
+        throw err
+    }
+}
+
+    export {pegarTodosMateriais, pegarMaterialPorId}

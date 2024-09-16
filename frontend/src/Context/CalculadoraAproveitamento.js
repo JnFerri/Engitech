@@ -29,7 +29,6 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     const [ModalVisualizacaoEstaVisivel , setModalVisualizacaoEstaVisivel] = useState(false)
     const [MedidaAPecaEmResultado, setMedidaAPecaEmResultado] = useState(0)
     const [MedidaBPecaEmResultado, setMedidaBPecaEmResultado] = useState(0)
-    const [DadosChapaFixadoModal, setDadosChapaFixaModal] = useState(false)
 
     function HandleMedidaA(e){
         let medida = e.target.value
@@ -71,9 +70,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
         setEspessuraSelecionada(e.target.value)
     }
 
-    function HandleScrollModal(){
-        setDadosChapaFixaModal(true)
-    }
+    
 
    
 
@@ -155,7 +152,7 @@ export const CalculadoraAproveitamentoProvider = ({children}) => {
     
 
     return (
-    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoMisturado, DadosChapaFixadoModal}}>
+    <CalculadoraAproveitamentoContext.Provider value={{ MedidaA , MedidaB , Peso , MaterialSelecionado , EspessuraSelecionada , DadosResultado , EspessurasOptions, HandleMedidaA , HandleMedidaB , HandlePeso , HandleMaterialSelecionado , HandleEspessuraSelecionada , HandleSubmit, setMaterialOptions , MaterialOptions ,setEspessurasOptions , QuantidadesPecasChapa , AlturaChapaVisualizacao , ComprimentoChapaVisualizacao , AbreVisualizacaoCriaRetangulosPosicionamentos , FechaModalVisualizacao , ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal , RetangulosPosicionamentoVertical , RetangulosPosicionamentoMaximoMisturado}}>
       {children}
     </CalculadoraAproveitamentoContext.Provider>
   );

@@ -1,10 +1,11 @@
 import { Router } from "express";
-import todosMateriais from "../../Controllers/Materiais.js";
+import {todosMateriais , materialPorId} from '../../Controllers/Materiais.js'
 
 const router = Router()
 
 router.get('/', (req,res) => todosMateriais(req,res))
 
+router.get('/:id', (req,res) => materialPorId(req,res))
 
 
 

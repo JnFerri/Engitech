@@ -13,7 +13,7 @@
     "sinon": "^18.0.0"
   },
   "name": "engtech-backend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Backend da aplicação engtech",
   "main": "server.js",
   "type": "module",

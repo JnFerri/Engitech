@@ -16,7 +16,7 @@ function ListaMenuCalculoChapas(){
         <ListaMenuLateral>
             <LinhaMenuLateral onClick={() => HandleOpcaoSelecionadaMenuLateral('CalculadoraAproveitamento')} ativado = {OpcaoSelecionadaMenuLateral === 'CalculadoraAproveitamento' ? true : false} >Calculadora Chapa de Composição</LinhaMenuLateral>
             <LinhaMenuLateral onClick={() => HandleOpcaoSelecionadaMenuLateral('ChapasCadastradas')} ativado = {OpcaoSelecionadaMenuLateral === 'ChapasCadastradas' ? true : false}>Chapas Cadastradas</LinhaMenuLateral>
-            <LinhaMenuLateral onClick={() => HandleOpcaoSelecionadaMenuLateral('RetalhosEstoque')} ativado = {OpcaoSelecionadaMenuLateral === 'RetalhosEstoque' ? true : false}>Retalhos em Estoque</LinhaMenuLateral>
+            <LinhaMenuLateral onClick={() => HandleOpcaoSelecionadaMenuLateral('CalculadoraPesoChapas')} ativado = {OpcaoSelecionadaMenuLateral === 'CalculadoraPesoChapas' ? true : false}>Calculadora Peso Chapa</LinhaMenuLateral>
         </ListaMenuLateral>
     )
 }

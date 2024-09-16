@@ -19,4 +19,18 @@ async function todosMateriais(req,res) {
     }
 }
 
-export default todosMateriais
+async function materialPorId(req,res){
+    try{
+        if(await verificaToken(req)){
+            const sql = `select * from materiais where mat_id = ?`
+            const [rows] = await DBConnection.promise().query(sql, [req.params.id])
+            res.status(200).json(rows)
+        }else{
+            res.status(401).json({ message: 'Token inválido.' })
+        }
+    }catch(err){
+        res.status(500).json({ message: `Erro interno do servidor ao pegar material por id. ${err}` })
+    }
+}
+
+export {todosMateriais , materialPorId}
