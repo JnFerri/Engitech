@@ -1,7 +1,7 @@
 import DBConnection from "../Configs/DBconfig.js"
 import verificaToken from "../Helpers/verificaToken.js"
 
-
+// Pega todos os materiais cadastrados
 async function todosMateriais(req,res) {
     try{
         if(await verificaToken(req)){
@@ -19,6 +19,7 @@ async function todosMateriais(req,res) {
     }
 }
 
+// Pega material por id do material
 async function materialPorId(req,res){
     try{
         if(await verificaToken(req)){

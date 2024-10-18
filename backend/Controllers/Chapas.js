@@ -3,7 +3,7 @@ import DBConnection from "../Configs/DBconfig.js";
 import verificaToken from "../Helpers/verificaToken.js";
 
 
-
+// Pega todas as chapas do banco de dados.
 async function todasChapas(req,res) {
     try{
         if(await verificaToken(req)){
@@ -17,6 +17,7 @@ async function todasChapas(req,res) {
     }
 } 
 
+// Pega chapa por id
 async function chapaPorId(req,res){
     try{
         if(await verificaToken(req)){
@@ -30,6 +31,7 @@ async function chapaPorId(req,res){
     }
 }
 
+// Pega chapa pelo código da chapa do h2j que foi cadastrado no sistema engtech.
 async function chapaPorCodigo(req,res){
     
     try{
@@ -44,6 +46,7 @@ async function chapaPorCodigo(req,res){
     }
 }
 
+// Pega todas as chapas por id do material.
 async function chapaPorMaterial(req,res){
 try{
     if(await verificaToken(req)){
@@ -57,6 +60,7 @@ try{
 }
 }
 
+// Cadastra nova chapa.
 async function cadastrarChapa(req,res){
     try{
         if(await verificaToken(req)){
@@ -78,6 +82,7 @@ async function cadastrarChapa(req,res){
     }
 }
 
+// Deleta chapa por id.
 async function deletarChapaPorId(req,res){
     try{
         if(await verificaToken(req)){
@@ -92,6 +97,7 @@ async function deletarChapaPorId(req,res){
 }
 }
 
+// Pega chapas por id do material e espessura.
 async function pegaChapasParaCalculo(req,res){
     try{
         if(await verificaToken(req)){
@@ -106,6 +112,7 @@ async function pegaChapasParaCalculo(req,res){
     }
 }
 
+// Atualiza dados de uma chapa.
 async function AtualizarChapa(req,res){
     try{
         if(await verificaToken(req)){
@@ -121,6 +128,7 @@ async function AtualizarChapa(req,res){
     }
 }
 
+// Pega todas as espessuras de chapa de um material pelo id do material
 async function PegarEspessurasChapasPorMaterial(req,res){
     try{
         if(await verificaToken(req)){

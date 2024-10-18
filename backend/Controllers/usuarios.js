@@ -3,7 +3,7 @@ import confereHash from "../Helpers/ConfereHash.js";
 import hashPassword from "../Helpers/hashPassword.js";
 import verificaToken from "../Helpers/verificaToken.js";
 
-
+// Pega dados de todos os usuarios cadastrados.
 async function todosUsuarios(req,res) {
     try{
         if(await verificaToken(req)){
@@ -21,6 +21,7 @@ async function todosUsuarios(req,res) {
     }
 }
 
+// Pega informações de um usuario pelo id do usuario.
 async function usuarioPorId(req,res) {
     try{
     if(await verificaToken(req)){
@@ -38,6 +39,7 @@ async function usuarioPorId(req,res) {
 }
 }
 
+// Cria um novo usuario.
 async function criarUsuario(req,res){
     try{
         if(await verificaToken(req)){
@@ -62,6 +64,7 @@ async function criarUsuario(req,res){
     
 }
 
+// Deleta um usuario.
 async function deletarUsuarioPorId(req,res){
     try{
         if(await verificaToken(req)){
@@ -77,6 +80,7 @@ async function deletarUsuarioPorId(req,res){
     }
 }
 
+// Altera a senha de um usuario.
 async function alterarSenhaUsuario(req,res){
     try{
         if(await verificaToken(req)){
@@ -92,6 +96,7 @@ async function alterarSenhaUsuario(req,res){
     }
 }
 
+// Faz login
 async function loginUsuario(req,res){
     try{
         const sql = `select * from usuarios left join tipos_usuarios tu on usuarios.tpu_id = tu.tpu_id where usu_email = ?`
@@ -111,6 +116,7 @@ async function loginUsuario(req,res){
     }
 }
 
+// Pega todos os tipo de usuario.
 async function pegarTiposUsuarios(req,res){
     try{
         if(await verificaToken(req)){
@@ -125,6 +131,7 @@ async function pegarTiposUsuarios(req,res){
     }
 }
 
+// Pega todos os usuarios por email.
 async function pegarTodosUsuariosPorEmailPesquisa(req,res){
     try{
         if(await verificaToken(req)){
@@ -139,6 +146,7 @@ async function pegarTodosUsuariosPorEmailPesquisa(req,res){
     }
 }
 
+// Define usu_situação como 'Inativo' conforme id do usuario.
 async function inativarUsuario(req,res){
     try{
         if(await verificaToken(req)){
@@ -153,6 +161,7 @@ async function inativarUsuario(req,res){
     }
 }
 
+// Define usu_situação como 'Ativo' conforme id do usuario.
 async function ativarUsuario(req,res){
     try{
         if(await verificaToken(req)){
