@@ -10,7 +10,9 @@
     "mocha": "^10.7.3",
     "mysql2": "^3.11.0",
     "nodemon": "^3.1.4",
-    "sinon": "^18.0.0"
+    "sinon": "^18.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "name": "engtech-backend",
   "version": "1.1.0",
@@ -19,8 +21,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon server.js",
-    "start" : "node server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Jean Ferri",
   "license": "ISC"

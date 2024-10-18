@@ -15,7 +15,7 @@ async function todasChapas(req,res) {
     }catch(err){
         res.status(500).json({message:`erro interno do servidor :  ${err}`})
     }
-}
+} 
 
 async function chapaPorId(req,res){
     try{
@@ -31,6 +31,7 @@ async function chapaPorId(req,res){
 }
 
 async function chapaPorCodigo(req,res){
+    
     try{
         if(await verificaToken(req)){
             const [rows] = await DBConnection.promise().query(`select * from chapas join materiais m on chapas.mat_id = m.mat_id where chapas.cha_codigo = ${req.params.codigo}`)
