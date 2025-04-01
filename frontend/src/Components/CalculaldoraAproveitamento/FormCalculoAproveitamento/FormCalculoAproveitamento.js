@@ -33,7 +33,7 @@ const FormCalculo = styled.form`
 
 
 function FormCalculoAproveitamento() {
-    const {HandleMedidaA, HandleMedidaB, HandlePeso, HandleMaterialSelecionado, HandleEspessuraSelecionada, EspessurasOptions,MaterialSelecionado,MaterialOptions,setMaterialOptions , HandleSubmit, MedidaA, MedidaB, Peso, EspessuraSelecionada} = useCalculadoraAproveitamento()
+    const {HandleMedidaA, HandleMedidaB, HandlePeso, HandleMaterialSelecionado, HandleEspessuraSelecionada, EspessurasOptions,MaterialSelecionado,MaterialOptions,setMaterialOptions , CalcularAproveitamento, MedidaA, MedidaB, Peso, EspessuraSelecionada} = useCalculadoraAproveitamento()
 
     useEffect(() => {
         async function PegarMateriais(){
@@ -47,7 +47,7 @@ function FormCalculoAproveitamento() {
 
     return(
         <FormContainer>
-            <FormCalculo onSubmit={HandleSubmit}>
+            <FormCalculo onSubmit={CalcularAproveitamento}>
                 <DivLinha>
                     <DivColuna>
                         <Label tamanho = "pequeno">Medida A da Peça </Label>

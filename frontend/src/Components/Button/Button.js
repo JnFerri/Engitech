@@ -40,11 +40,11 @@ const Button = styled.button`
   font-style: normal;
 
     &&:hover {
-    background-color: ${props => props.primario ? '#4580bf' : props.secundario ? '#bf8845' : '#807f7e'};
+    background-color: ${props => props.primario ? '#4580bf' : props.secundario ? '#bf8845' : props.deletar ? "#f26d63" : props.ativar ? '#a2c783' : '#807f7e'};
     }
 
     &&:active {
-    background-color: ${props => props.primario ? '#0b243d' : props.secundario ? '#7a4205' : '#171615'};
+    background-color: ${props => props.primario ? '#0b243d' : props.secundario ? '#7a4205' : props.deletar ? "#f26d63" : props.ativar ? '#a2c783' : '#171615'};
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5);
     
     }

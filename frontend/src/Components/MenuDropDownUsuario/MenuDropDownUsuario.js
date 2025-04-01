@@ -21,7 +21,7 @@ position:relative;
 
 function MenuDropDownUsuario(){
     const [estaAberto, setEstaAberto] = useState(false)
-    const Usuario = JSON.parse(localStorage.getItem('Usuario'))
+    const Usuario = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? JSON.parse(localStorage.getItem('Usuario')) : {usu_nome : 'Usuario StoryBook'}
     const dropdownRef = useRef(null);
 
   const handleCliqueForaFechaMenu = (event) => {
@@ -38,7 +38,7 @@ function MenuDropDownUsuario(){
   }, []);
 
     return(
-        <MenuContainer ref={dropdownRef} onClick={() => setEstaAberto(!estaAberto)} >
+        <MenuContainer ref={dropdownRef} onClick={() => window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? setEstaAberto(!estaAberto) : window.alert('Abre o menu dropDown, porem este tem navigation impossibilitando ser visto no storybook.')} >
                 <Imagem src={iconeUsuario} alt="imagem usuario" width='15%' margin='5px 0' />
                 <span style={{color:'white', fontFamily: "Barlow Condensed, system-ui", fontWeight: '400', fontStyle: 'normal'}}>{Usuario.usu_nome}</span>
                 {

@@ -23,6 +23,9 @@ const FormCalculadoraPesoChapaContainer = styled.form`
     const { EspessuraFormCalculadoraPesoChapa , HandleEspessuraFormCalculadoraPesoChapa, AlturaFormCalculadoraPesoChapa , HandleAlturaFormCalculadoraPesoChapa, ComprimentoFormCalculadoraPesoChapa , HandleComprimentoFormCalculadoraPesoChapa, MaterialFormCalculadoraPesoChapa , HandleMaterialFormCalculadoraPesoChapa,  HandleCalcularPesoChapa} = useCalculadoraPesoChapa()
     const {setMaterialOptions,MaterialOptions} = useCalculadoraAproveitamento()
 
+    useEffect(() => {
+        console.log(typeof(EspessuraFormCalculadoraPesoChapa) , typeof(AlturaFormCalculadoraPesoChapa) , typeof(ComprimentoFormCalculadoraPesoChapa) , typeof(MaterialFormCalculadoraPesoChapa))
+    } , [EspessuraFormCalculadoraPesoChapa , AlturaFormCalculadoraPesoChapa , ComprimentoFormCalculadoraPesoChapa , MaterialFormCalculadoraPesoChapa])
 
     useEffect(() => {
         async function PegarMateriais(){
@@ -65,7 +68,7 @@ const FormCalculadoraPesoChapaContainer = styled.form`
                     }
                 </SelectForm>
             </DivColuna>
-            <Button secundario tamanho='grande' type='submit' width='15%'>Calcular</Button>
+            <Button secundario ='true' tamanho='grande' type='submit' width='15%'>Calcular</Button>
         </FormCalculadoraPesoChapaContainer>
     )
 }

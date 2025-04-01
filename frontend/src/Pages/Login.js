@@ -30,11 +30,13 @@ background-color:black;
   }
 `
 
-
+// Componente de pagina de login, une o componente de formulario de login e Banner da tela de login.
 function Login(){
     const {IsAuth} = useUsuario()
 
     const navigate = useNavigate()
+
+    // Caso o estado isAuth for true já encaminha o usuario para a rota /home.
     useEffect(() => {
         if(IsAuth){
             navigate('/home')

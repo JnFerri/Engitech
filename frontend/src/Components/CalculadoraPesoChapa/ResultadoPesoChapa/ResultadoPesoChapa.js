@@ -3,6 +3,7 @@ import Titulo2 from "../../Titulo2/Titulo2.js";
 import Span from "../../Span/Span.js";
 import { useCalculadoraPesoChapa } from "../../../Context/CalculadoraPesoChapa.js";
 import DivColuna from "../../DivColuna/DivColuna.js";
+import { useCalculadoraPesoChapaMock } from "../../../stories/Mocks/CalculadoraPesoChapaContext.mock.js";
 
 
 
@@ -22,7 +23,10 @@ const ResultadoPesoChapaContainer = styled.section`
 
 
 function ResultadoPesoChapa(){
-    const {DadosChapaResultado} = useCalculadoraPesoChapa()
+    const hook = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ?   useCalculadoraPesoChapa :  useCalculadoraPesoChapaMock
+    const {DadosChapaResultado} = hook()
+    
+    
     return(
         <ResultadoPesoChapaContainer>
                 {

@@ -6,7 +6,7 @@ const HomePage = styled.main`
     width:100%;
     height:100vh;
 `
-
+//Componente de pagina que une os componentes de barra de navegação superior e painel principal de Single page apllication.
 function Home(){
     return(
         <HomePage>

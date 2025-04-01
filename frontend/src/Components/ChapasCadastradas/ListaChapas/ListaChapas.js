@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useChapasCadastradas } from "../../../Context/ChapasCadastradas.js";
 import Button from "../../Button/Button.js";
 import tranformarDataString from "../../../Helpers/tranformarDataString.js";
+import { useChapasCadastradasMock } from "../../../stories/Mocks/ChapasCadastradasContext.mock.js";
 
 const ListaChapasContainer = styled.section`
 display:flex;
@@ -61,8 +62,13 @@ const TdTabela = styled.td`
 
 
 function ListaChapas() {
-    const {DadosChapasLista, AbrirModalChapa , handleDeletarChapa} = useChapasCadastradas()
+    const hooks = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ?  useChapasCadastradas :  useChapasCadastradasMock
+
+    const {DadosChapasLista, AbrirModalChapa ,handleDeletarChapa} = hooks()
     
+
+  
+
     const colunas = {
         cha_codigo: { nome: "Código", largura: "5%" },
         cha_nome: { nome: "Nome", largura: "35%" },
@@ -113,7 +119,7 @@ function ListaChapas() {
 
                 </TdTabela>
                 <TdTabela>
-                <Button deletar width='110%' tamanho='pequeno' onClick={() => handleDeletarChapa(item.cha_id)}>Deletar</Button>
+                <Button deletar="true" width='110%' tamanho='pequeno' onClick={() => handleDeletarChapa(item.cha_id)}>Deletar</Button>
 
                 </TdTabela>
               </TrTabela>

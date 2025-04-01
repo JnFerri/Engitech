@@ -17,15 +17,16 @@ margin: 0 5%;
 `
 
 function FormLogin(props){
-    const {handleSubmit , handleEmail , handleSenha , error} = useUsuario()
-    const navigate = useNavigate()
+    const {handleSubmit , handleEmail , handleSenha , error, email ,senha} = useUsuario()
+    const navegateType = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? useNavigate : () => {}
+    const navigate = navegateType()
     
     return(
         <FormContainer width={props.width} onSubmit={async (e) => await handleSubmit(e,navigate)}>
             <Label color="white">Email</Label>
-            <InputForm type="email" onChange={handleEmail}></InputForm>
+            <InputForm type="email" onChange={handleEmail} value={email}></InputForm>
             <Label color="white">Senha</Label>
-            <InputForm type="password" onChange={handleSenha}></InputForm>
+            <InputForm type="password" onChange={handleSenha} value={senha}></InputForm>
             <Button primario = 'true' width='30%'>Entrar</Button>
             {
                 error ? <span style={{color:'red'}}> {error} </span> : null

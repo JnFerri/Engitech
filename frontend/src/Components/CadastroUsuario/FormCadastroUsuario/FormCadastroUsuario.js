@@ -72,7 +72,7 @@ function FormCadastroUsuario(){
                     <InputForm type='password' tamanho='medio' width='95%' value={SenhaForm} onChange={HandleSenhaForm}/> 
                 </DivColuna>
             </DivLinha>
-            <Button primario tamanho ='medio' width='30%' >Cadastrar</Button>
+            <Button primario = 'true' tamanho ='medio' width='30%' >Cadastrar</Button>
         </FormContainer>
     )
 }

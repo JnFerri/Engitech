@@ -28,12 +28,15 @@ const FormPesquisa = styled.form`
 `
 
 function FormPesquisaChapas(){
+    
     const {HandleTipoPesquisaSelecionado, TipoPesquisaSelecionado ,setOpcoesMateriais, OpcoesMateriais ,HandlePegaDadosPesquisados ,InputPesquisaValor, HandleInputPesquisaValor} = useChapasCadastradas()
 
     useEffect(() => {
         async function PegarMateriais(){
+            
             const resultado = await pegarTodosMateriais()
             setOpcoesMateriais(resultado.data)
+            
         }
         PegarMateriais()
     }

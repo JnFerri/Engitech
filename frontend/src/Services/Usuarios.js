@@ -137,7 +137,6 @@ async function pegarTiposUsuarios(){
             }
         }
         const result = await fetch(`${process.env.REACT_APP_URL_BACKEND}/usuarios/get/tiposUsuarios`, options)
-        console.log(result)
         const data = await result.json()
         return {data:data , status:result.status}
     }catch(err){

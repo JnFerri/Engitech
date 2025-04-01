@@ -7,6 +7,8 @@ import ListaMenuLateralAdmin from "./ListaMenuLateralAdmin/ListaMenuLateralAdmin
 import ListaMenuLateralMembro from "./ListaMenuLateralMembro/ListaMenuLateralMembro.js";
 import ListaMenuLateralUsuariosCadastros from "./ListaMenuLateralUsuariosCadastros/ListaMenuLateralUsuariosCadastros.js";
 import { useEffect } from "react";
+import { useMenuLateralMock } from "../../stories/Mocks/MenuLateralContext.mock.js";
+import { useUsuarioMock } from "../../stories/Mocks/UsuariosContext.mock.js";
 
 
 const MenuLateralContainer = styled.section`
@@ -29,14 +31,19 @@ width:100%;
 `
 
 function MenuLateral(){
-    const {TipoOpcoesMenuLateral , HandleTipoMenu} = useMenuLateral()
-    const {TipoUsuario, setTipoUsuario} = useUsuario()  
+    const hookMenu = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? useMenuLateral : useMenuLateralMock
+    const hookUsuario = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? useUsuario : useUsuarioMock
+    const {TipoOpcoesMenuLateral , HandleTipoMenu} = hookMenu()
+    const {TipoUsuario, setTipoUsuario} = hookUsuario()  
 
-
+    
     useEffect(() => {
         const Usuarios = localStorage.getItem('Usuario')
         const Usuario = JSON.parse(Usuarios)
-        setTipoUsuario(Usuario.tpu_id)
+        if(Usuario){
+            setTipoUsuario(Usuario.tpu_id)
+            
+        }
     }, [setTipoUsuario])
     return(
         <MenuLateralContainer>

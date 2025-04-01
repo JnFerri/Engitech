@@ -13,9 +13,10 @@ const Label = styled.label`
     font-family: "Barlow Condensed", system-ui;
     font-weight: 400;
     font-style: normal;
-    text-align : ${props => props.textAlignt || 'left'};
+    text-align : ${props => props.textAlign || 'left'};
     width : ${props => props.width || '100%'};
     margin : 0.5rem 0 0 0;
+    display:block;
 }
 
 `

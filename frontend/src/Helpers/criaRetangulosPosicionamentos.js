@@ -1,4 +1,4 @@
-import MaxRectsBinPack from 'rects-bin-pack'
+import * as MaxRectsBinPack from 'rects-bin-pack'
 
 function criaRetangulosPosicionamentos(dadosChapa ,MedidaA , MedidaB , maquina ){
     

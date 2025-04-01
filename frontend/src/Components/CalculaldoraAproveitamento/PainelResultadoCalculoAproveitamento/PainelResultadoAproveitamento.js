@@ -5,6 +5,7 @@ import DivColuna from "../../DivColuna/DivColuna.js";
 import Label from "../../Label/Label.js";
 import Span from "../../Span/Span.js";
 import ordenarChapasPorMenorPerda from "../../../Helpers/ordenarChapasMenorPerda.js";
+import { useCalculadoraAproveitamentoMock } from "../../../stories/Mocks/CalculadoraAproveitamentoContext.mock.js";
 
 
 const PainelResultadoAproveitamentoContainer = styled.section`
@@ -35,7 +36,8 @@ const ItemResultadoContainer = styled.div`
     `
 
 function PainelResultadoAproveitamento(){
-    const {DadosResultado , AbreVisualizacaoCriaRetangulosPosicionamentos} = useCalculadoraAproveitamento()
+    const hook = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? useCalculadoraAproveitamento : useCalculadoraAproveitamentoMock
+    const {DadosResultado , AbreVisualizacaoCriaRetangulosPosicionamentos} = hook()
 
     return (
         <PainelResultadoAproveitamentoContainer>

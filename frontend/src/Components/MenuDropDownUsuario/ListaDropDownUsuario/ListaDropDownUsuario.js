@@ -32,8 +32,10 @@ const ListaItem = styled.li`
 
 
 function ListaDropDownUsuario(){
-    const {handleLogout} = useUsuario()
-    const navigate = useNavigate()
+    const {handleLogout} = useUsuario() 
+    const navigate =  useNavigate()
+    
+    
     
 
     return(

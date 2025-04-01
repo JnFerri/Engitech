@@ -7,9 +7,10 @@ import { CalculadoraPesoChapaProvider } from "../../Context/CalculadoraPesoChapa
 import { CalculadoraAproveitamentoProvider } from "../../Context/CalculadoraAproveitamento.js";
 import { ChapasCadastradasProvider } from "../../Context/ChapasCadastradas.js";
 
+
 const PainelPrincipalContainer = styled.section`
 width:100%;
-height:94%;
+height:94vh;
 display:flex;
 align-items:center;
 justify-content:space-around;

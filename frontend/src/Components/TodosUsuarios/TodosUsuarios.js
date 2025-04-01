@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ListaUsuarios from "./ListaUsuarios/ListaUsuarios.js";
 import {  useTodosUsuarios } from "../../Context/TodosUsuarios.js";
 import ModalAlteracaoSenha from "./ModalAlteracaoSenha/ModalAlteracaoSenha.js";
-import { useEffect } from "react";
+import { useTodosUsuariosMock } from "../../stories/Mocks/TodosUsuariosContext.mock.js";
 
 
 const UsuariosContainer = styled.section`
@@ -14,11 +14,9 @@ margin: 1rem 0;
 `
 
 function TodosUsuarios(){
-    const {ModalAlteracaoSenhaEstaAtivo} = useTodosUsuarios()
+    const hookTodosUsuarios = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ? useTodosUsuarios : useTodosUsuariosMock
+    const {ModalAlteracaoSenhaEstaAtivo} = hookTodosUsuarios()
 
-    useEffect(() => {
-        console.log(ModalAlteracaoSenhaEstaAtivo)
-    }, [ModalAlteracaoSenhaEstaAtivo])
     return(
         
         <UsuariosContainer>

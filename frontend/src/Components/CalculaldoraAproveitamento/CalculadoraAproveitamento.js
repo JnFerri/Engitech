@@ -3,6 +3,8 @@ import FormCalculoAproveitamento from "./FormCalculoAproveitamento/FormCalculoAp
 import { useCalculadoraAproveitamento } from "../../Context/CalculadoraAproveitamento.js";
 import PainelResultadoAproveitamento from "./PainelResultadoCalculoAproveitamento/PainelResultadoAproveitamento.js";
 import ModalVisualizacaoResultadoAproveitamento from "./ModalVisualizacaoResultadoAproveitamento/ModalVisualizacaoResultadoAproveitamento.js";
+import { useCalculadoraAproveitamentoMock } from "../../stories/Mocks/CalculadoraAproveitamentoContext.mock.js";
+
 
 const CalculadoraAproveitamentoContainer = styled.section`
 
@@ -15,7 +17,13 @@ margin: 1rem 0;
 
 
 function CalculadoraAproveitamento(){
-    const {PosicionamentoHorizontal, AlturaChapaVisualizacao, ComprimentoChapaVisualizacao , DadosResultado ,ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao } = useCalculadoraAproveitamento()
+
+    const hook = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ?   useCalculadoraAproveitamento :  useCalculadoraAproveitamentoMock
+
+    const { DadosResultado ,ModalVisualizacaoEstaVisivel , DadosChapaVisualizacao } = hook()
+
+
+    
     
     const isEmptyObject = (obj) => {
         return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
@@ -25,7 +33,7 @@ function CalculadoraAproveitamento(){
         <CalculadoraAproveitamentoContainer>
             {
                 ModalVisualizacaoEstaVisivel && !isEmptyObject(DadosChapaVisualizacao) ?
-                <ModalVisualizacaoResultadoAproveitamento DadosChapa={DadosChapaVisualizacao} PosicionamentoHorizontal={PosicionamentoHorizontal} AlturaChapaVisualizacao={AlturaChapaVisualizacao} ComprimentoChapaVisualizacao={ComprimentoChapaVisualizacao}/>
+                <ModalVisualizacaoResultadoAproveitamento />
                 :
                 <div>
                     <FormCalculoAproveitamento/>

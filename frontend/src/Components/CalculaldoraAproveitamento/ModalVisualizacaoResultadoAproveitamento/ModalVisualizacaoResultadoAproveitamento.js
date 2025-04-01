@@ -6,10 +6,10 @@ import DivColuna from "../../DivColuna/DivColuna.js";
 import Label from "../../Label/Label.js";
 import Span from "../../Span/Span.js";
 import Titulo2 from "../../Titulo2/Titulo2.js";
-import { useEffect } from "react";
 import { useCalculadoraAproveitamento } from "../../../Context/CalculadoraAproveitamento.js";
 import Titulo3 from "../../Titulo3/Titulo3.js";
 import VisualizacaoChapas from "../../VisualizacaoChapas/VisualizacaoChapas.js";
+import { useCalculadoraAproveitamentoMock } from "../../../stories/Mocks/CalculadoraAproveitamentoContext.mock.js";
 
 
 const ModalVisualizacaoResultadoContainer = styled.section`
@@ -59,19 +59,17 @@ const SecaoVisualizacaoResultadosChapas = styled.div`
 
 
 function ModalVisualizacaoResultadoAproveitamento(){
-    const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoMisturado, FechaModalVisualizacao, DadosChapaFixadoModal, HandleScrollModal} = useCalculadoraAproveitamento()
+    const hook = window.__STORYBOOK_ADDONS_CHANNEL__ === undefined ?   useCalculadoraAproveitamento :  useCalculadoraAproveitamentoMock
+    const {DadosChapaVisualizacao , RetangulosPosicionamentoHorizontal, RetangulosPosicionamentoVertical, RetangulosPosicionamentoMaximoMisturado, FechaModalVisualizacao} = hook()
 
-    useEffect(() => {
-        console.log(RetangulosPosicionamentoMaximoMisturado)
-    }, [RetangulosPosicionamentoMaximoMisturado])
     
     return(
         <Overlay>
         {
             DadosChapaVisualizacao ? 
 
-        <ModalVisualizacaoResultadoContainer onScrollCapture={HandleScrollModal}>
-        <SecoesVisualizacao DadosChapaFixadoModal={DadosChapaFixadoModal}>
+        <ModalVisualizacaoResultadoContainer >
+        <SecoesVisualizacao>
         <DivLinha width='100%' justifyContent='flex-start'>
             <Button secundario tamanho='medio' width='15%' onClick={() => FechaModalVisualizacao()}>Fechar</Button>
         </DivLinha>

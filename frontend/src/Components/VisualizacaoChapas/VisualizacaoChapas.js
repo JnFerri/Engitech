@@ -3,7 +3,7 @@ import * as d3 from "d3";
 
 function VisualizacaoChapas({ retangulos , alturaChapa , comprimentoChapa })  {
   const svgRef = useRef();
- console.log(alturaChapa , comprimentoChapa)
+ console.log(alturaChapa , comprimentoChapa ,retangulos)
  useEffect(() => {
   // Seleciona o elemento SVG
   const svg = d3.select(svgRef.current);
