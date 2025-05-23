@@ -14,6 +14,7 @@ Atualmente esta disponivel apenas os materiais : Inox304 , inox430 , aço galvan
 
 ## Visualização da aplicação para Testes. 
  - Faça um git clone do repositório.
+ - Rode `npm install` no backend e no frontend para instalar as dependencias.
  - Instale o banco de dados no mysql conforme script disponibilizado no repositorio para mock.
  - Altere o arquivo .env.exemplo do backend para .env e siga as instruções do arquivo readme.md para configurar e iniciar o servidor.
  - Altere o aquivo .env.exemplo do frontend para .env e siga as instruções do arquivo readme.md para configurar e iniciar a aplicação frontend.
