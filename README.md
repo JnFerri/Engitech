@@ -11,3 +11,11 @@ Atualmente esta disponivel apenas os materiais : Inox304 , inox430 , aço galvan
 - Frontend :	React.js
 - Backend :	Node.js, Express
 - Banco de Dados :	MySQL
+
+## Visualização da aplicação para Testes. 
+ - Faça um git clone do repositório.
+ - Instale o banco de dados no mysql conforme script disponibilizado no repositorio para mock.
+ - Altere o arquivo .env.exemplo do backend para .env e siga as instruções do arquivo readme.md para configurar e iniciar o servidor.
+ - Altere o aquivo .env.exemplo do frontend para .env e siga as instruções do arquivo readme.md para configurar e iniciar a aplicação frontend.
+ - Usuario de teste e senha existente no banco de dados de mock para login : email : teste@teste.com senha : teste123
+   
